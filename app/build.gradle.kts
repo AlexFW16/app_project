@@ -4,7 +4,7 @@ plugins {
 
 android {
     namespace = "uk.bradford.app_project"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "uk.bradford.app_project"
