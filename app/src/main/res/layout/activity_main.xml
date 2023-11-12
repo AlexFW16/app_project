@@ -6,13 +6,112 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintTop_toBottomOf="@+id/ciphersTextView"
+        tools:layout_editor_absoluteX="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/cipherButton6"
+                android:layout_width="230dp"
+                android:layout_height="150dp"
+                android:layout_weight="1"
+                android:contentDescription="@string/cipher4_button"
+                android:background="@drawable/rounded_button_shape"
+                android:layout_margin="10dp"
+                android:src="@android:drawable/btn_star" />
+
+
+            <ImageButton
+                android:id="@+id/cipherButton5"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_weight="1"
+                android:background="@drawable/rounded_button_shape"
+                android:layout_margin="10dp"
+                android:contentDescription="@string/cipher3_button"
+                android:src="@android:drawable/btn_star" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/cipherButton4"
+                android:layout_width="200dp"
+                android:layout_height="150dp"
+                android:layout_weight="1"
+                android:background="@drawable/rounded_button_shape"
+                android:layout_margin="10dp"
+                android:contentDescription="@string/cipher4_button"
+                android:src="@android:drawable/btn_star" />
+
+            <ImageButton
+                android:id="@+id/cipherButton3"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_weight="1"
+                android:background="@drawable/rounded_button_shape"
+                android:layout_margin="10dp"
+                android:contentDescription="@string/cipher3_button"
+                android:src="@android:drawable/btn_star" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/cipherButton2"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:contentDescription="@string/cipher2_button"
+                android:background="@drawable/rounded_button_shape"
+                android:layout_margin="10dp"
+                android:src="@android:drawable/btn_star" />
+
+            <ImageButton
+                android:id="@+id/vigenereButton"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:contentDescription="@string/vigenere_button"
+                android:background="@drawable/rounded_button_shape"
+                android:layout_margin="10dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/vigenere" />
+        </LinearLayout>
+    </LinearLayout>
+
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/ciphersTextView"
+        android:layout_width="122dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="8dp"
+        android:text="Ciphers"
+        android:textSize="34sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="151dp"
+        android:layout_marginBottom="8dp"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
