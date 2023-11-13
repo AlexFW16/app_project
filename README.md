@@ -9,7 +9,7 @@
   encrypts/decrypts with given params and the controller returns the result
 
 #### Basic Design Idea
-![[figma_first_draft.png]]
+![figma draft](https://github.com/alexfw16/app_project/blob/master/img/figma_first_draft.jpg?raw=true)
 
 
 #### Plan
