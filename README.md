@@ -12,6 +12,9 @@
 ![figma draft](https://github.com/alexfw16/app_project/blob/master/img/figma_first_draft.png?raw=true)
 
 
+#### Case Study / Problem
+Help people learn/understand how cryptography works in an intuitive and easy way.
+
 #### Plan
 1. Make the necessary XML layouts
 2. Create background logic (Model)
