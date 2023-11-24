@@ -1,57 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <!-- Existing ConstraintLayout as the main content -->
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <TextView
+                android:id="@+id/ciphersTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="8dp"
+                android:text="@string/dummy_cipher"
+                android:textSize="34sp" />
+
+            <EditText
+                android:id="@+id/key_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="text"
+                android:text="@string/key_input" />
+
+            <EditText
+                android:id="@+id/cryption_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="text"
+                android:text="@string/cryption_input" />
+
+            <Button
+                android:id="@+id/cryption_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/cryption_btn" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="380dp"
+                android:layout_height="294dp"
+                android:layout_margin="16dp"
+                android:gravity="top|left"
+                android:padding="4dp"
+                android:textColor="#000000"
+                android:text="Cipher or message here"
+                android:background="#FFFFFFFF"
+                android:textSize="18sp" />
+
+
+            <!-- the TextView text & color will remain static until then...  -->
+
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Drawer Nav -->
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:id="@+id/ciphersTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="8dp"
-            android:text="@string/dummy_cipher"
-            android:textSize="34sp" />
-
-        <EditText
-            android:id="@+id/key_input"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="text"
-            android:text="@string/key_input" />
-
-        <EditText
-            android:id="@+id/cryption_input"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="text"
-            android:text="@string/cryption_input" />
-
-        <Button
-            android:id="@+id/cryption_btn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/cryption_btn" />
-
-        <EditText
-            android:id="@+id/editTextText3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="text"
-            android:text="@string/cryption_output" />
-
-    </LinearLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_gravity="start"
+        app:menu="@menu/drawer_menu" /> <!-- You will create this menu resource -->
+</androidx.drawerlayout.widget.DrawerLayout>
