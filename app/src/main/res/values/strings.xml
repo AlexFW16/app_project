@@ -11,7 +11,9 @@
     <!-- Those strings change at runtime-->
 
     <string name="dummy_cipher">Cool Cipher </string>
+    <string name="Ciphers">Cipher App</string>
     <string name="cryption_input">Decryption/Encryption</string>
     <string name="cryption_output">Cipher or message</string>
-    <string name="cryption_btn">De/Encrypt</string>
+    <string name="Encryption_btn">Encrypt</string>
+    <string name="Decryption_btn">Decrypt</string>
 </resources>

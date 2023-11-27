@@ -1,5 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--- BLACK & WHITE -->
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <!-- Basic Colors -->
+    <color name="red">#FF0000</color>
+    <color name="green">#008000</color>
+    <color name="blue">#0000FF</color>
+    <color name="yellow">#FFFF00</color>
+    <color name="cyan">#00FFFF</color>
+    <color name="magenta">#FF00FF</color>
+    <color name="gray">#808080</color>
+    <color name="silver">#C0C0C0</color>
+    <color name="maroon">#800000</color>
+    <color name="olive">#808000</color>
+    <color name="purple">#800080</color>
+    <color name="teal">#008080</color>
+    <color name="navy">#000080</color>
+
+    <!-- Light Colors -->
+    <color name="light_red">#FF6666</color>
+    <color name="light_green">#66FF66</color>
+    <color name="light_blue">#6666FF</color>
+    <color name="light_yellow">#FFFF66</color>
+    <color name="light_cyan">#66FFFF</color>
+    <color name="light_magenta">#FF66FF</color>
+    <color name="light_gray">#D3D3D3</color>
+
+    <!-- Dark Colors -->
+    <color name="dark_red">#800000</color>
+    <color name="dark_green">#006400</color>
+    <color name="dark_blue">#00008B</color>
+    <color name="dark_yellow">#808000</color>
+    <color name="dark_cyan">#008B8B</color>
+    <color name="dark_magenta">#8B008B</color>
+    <color name="dark_gray">#A9A9A9</color>
+
+    <!-- Additional Colors -->
+    <color name="orange">#FFA500</color>
+    <color name="pink">#FFC0CB</color>
+    <color name="lime">#00FF00</color>
+    <color name="indigo">#4B0082</color>
+    <color name="violet">#EE82EE</color>
+    <color name="brown">#A52A2A</color>
+    <color name="beige">#F5F5DC</color>
+    <color name="coral">#FF7F50</color>
+    <color name="khaki">#F0E68C</color>
+    <color name="gold">#FFD700</color>
+    <color name="plum">#DDA0DD</color>
+    <color name="orchid">#DA70D6</color>
+    <color name="turquoise">#40E0D0</color>
+    <color name="sienna">#A0522D</color>
+    <color name="sky_blue">#87CEEB</color>
+    <color name="chocolate">#D2691E</color>
+    <color name="tomato">#FF6347</color>
+    <color name="bisque">#FFE4C4</color>
+    <color name="mint">#98FF98</color>
+    <color name="ivory">#FFFFF0</color>
 </resources>
