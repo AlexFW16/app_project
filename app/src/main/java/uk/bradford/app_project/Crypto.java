@@ -2,19 +2,23 @@ package uk.bradford.app_project;
 
 
 import java.util.Arrays;
-import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import static uk.bradford.app_project.Util.*;
 
 //TODO rename class
 // TODO consider spaces in the text
 public class Crypto {
 
 
-    // TODO maybe outsource alphabets?
+    // TODO maybe outsource alphabets? -> alphabets are not that relevant anymore
     static final String[] characters = "A B C D E F G H I J K L M N O P Q R S T U V W X Y Z 0 1 2 3 4 5 6 7 8 9".split(" ");
     // Alphabet with only uppercase letters
-    static final Set<String> alphabet1 = Arrays.stream(characters).limit(26).collect(Collectors.toSet());
+    static final Set<Character> alphabet1 = Arrays.stream(characters).limit(26).map(s -> s.charAt(0)).collect(Collectors.toSet());
 
     // Alphabet with uppercase letters + numbers
     static final Set<String> alphabet2 = Arrays.stream(characters).collect(Collectors.toSet());
@@ -23,15 +27,16 @@ public class Crypto {
     // Matches cipher to alphabet
     // e.g. Vigenere does not allow for numbers
     private static boolean checkAlphabet(Cipher cipher, String text) {
-        Set<String> alphabet;
+        Set<Character> alphabet;
 
         switch (cipher) {
 
             case VIGENERE:
                 alphabet = Crypto.alphabet1;
                 break;
-            case XOR:
-                // WIth XOR, everything is converted to its binary representation, hence no alphabet check needed
+            case XOR: // WIth XOR, everything is converted to its binary representation, hence no alphabet check needed
+            case SUBSTITUTION:
+            case TRANSPOSITION:
                 return true;
             default:
                 throw new IllegalArgumentException("Given cipher does not exist or corresponding alphabet has not yet been implemented");
@@ -44,17 +49,21 @@ public class Crypto {
         return true;
     }
 
-    public static String encrypt(Cipher cipher, String plaintext, String key) {
+    public static String encrypt(Cipher cipher, String plaintext, String key) throws IllegalArgumentException {
+
+        if (!checkAlphabet(cipher, plaintext + key))
+            throw new IllegalArgumentException("Contains letters that are not in the alphabet of this cipher");
 
         switch (cipher) {
 
             case VIGENERE:
-                checkAlphabet(cipher, plaintext + key);
                 return encryptVigenere(plaintext, key);
             case XOR:
-                checkAlphabet(cipher, plaintext + key);
                 return encryptXOR(plaintext, key);
-
+            case SUBSTITUTION:
+                return encryptSubstitutionCipher(plaintext, key);
+            case TRANSPOSITION:
+                return encryptTranspositionCipher(plaintext, key);
             default:
                 throw new IllegalArgumentException("Given Cipher does not exist or is not implemented (Encryption)");
         }
@@ -71,6 +80,9 @@ public class Crypto {
             case XOR:
                 checkAlphabet(cipher, ciphertext + key);
                 return decryptXOR(ciphertext, key);
+            case SUBSTITUTION:
+                checkAlphabet(cipher, ciphertext + key);
+                return decryptSubstitutionCipher(ciphertext, key);
 
             default:
                 throw new IllegalArgumentException("Given Cipher does not exist or is not implemented (Decryption)");
@@ -80,92 +92,128 @@ public class Crypto {
 
     }
 
+    /* Encrypts the given string by shifting each character for the amount of the corresponding character in the key
+    , with A = 0, B = 1, ..., ex.:
+   ABCABCA
+   MESSAGE
+   -------
+   MFUSBIE
+
+    */
     private static String encryptVigenere(String plaintext, String key) {
 
         // make the key as long as the plaintext
-        if (key.length() > plaintext.length()) {
-
-        } else if (key.length() < plaintext.length()) {
-
-            while (key.length() < plaintext.length()) {
-                key += key;
-            }
-        }
+        key = keyToMessageLength(plaintext, key);
 
         // Creates 2 int arrays that contain the index of each letter in the alphabet
-        int[] keyArr = key.chars().limit(plaintext.length()).map(c -> c - 64).toArray();
-        int[] plaintextArr = plaintext.chars().map(c -> c - 64).toArray();
+        int[] keyArr = key.chars().limit(plaintext.length()).map(c -> c - 65).toArray();
+        int[] plaintextArr = plaintext.chars().map(c -> c - 65).toArray();
 
         int[] out = new int[plaintextArr.length];
         // Here, the main encryption happens
         for (int i = 0; i < plaintext.length(); i++)
-            out[i] = plaintextArr[i] + keyArr[i] % 27; // to stay in the alphabet range
+            out[i] = (plaintextArr[i] + keyArr[i]) % 26; // to stay in the alphabet range
 
 
-        return Arrays.stream(out)
-                .map(c -> c + 64) // mapping back to the ASCII representation
+        return Arrays.stream(out).map(c -> c + 65) // mapping back to the ASCII representation
                 .mapToObj(c -> (char) c) // casting back to character
                 .map(String::valueOf) // maps every character to a String object
-                .collect(Collectors.joining()); // joins the string
+                .collect(Collectors.joining());
     }
 
+    // See encryptVigenere
     private static String decryptVigenere(String ciphertext, String key) {
 
         // make the key as long as the plaintext
-        if (key.length() > ciphertext.length()) {
-
-        } else if (key.length() < ciphertext.length()) {
-
-            while (key.length() < ciphertext.length()) {
-                key += key;
-            }
-        }
+        key = keyToMessageLength(ciphertext, key);
 
         // Creates 2 int arrays that contain the index of each letter in the alphabet
-        int[] keyArr = key.chars().limit(ciphertext.length()).map(c -> c - 64).toArray();
-        int[] plaintextArr = ciphertext.chars().map(c -> c - 64).toArray();
+        int[] keyArr = key.chars().limit(ciphertext.length()).map(c -> c - 65).toArray();
+        int[] plaintextArr = ciphertext.chars().map(c -> c - 65).toArray();
 
         int[] out = new int[plaintextArr.length];
         // Here, the main decryption happens
         for (int i = 0; i < ciphertext.length(); i++)
-            out[i] = plaintextArr[i] - keyArr[i] % 27;
+            out[i] = (plaintextArr[i] - keyArr[i] + 26) % 26;
 
-        return Arrays.stream(out)
-                .map(c -> c + 64) // mapping back to the ASCII representation
+        return Arrays.stream(out).map(c -> c + 65) // mapping back to the ASCII representation
                 .mapToObj(c -> (char) c) // casting back to character
                 .map(String::valueOf) // maps every character to a String object
-                .collect(Collectors.joining()); // joins the string
+                .collect(Collectors.joining());
 
 
     }
 
     //TODO implement
-    private static String encryptXOR(String ciphertext, String key) {
+    private static String encryptXOR(String plainText, String key) {
+        key = keyToMessageLength(plainText, key);
 
-        return null;
-    }
+        int[] binaryPlaintext = fromStringToIntArray(fromStringToBinaryString(plainText));
+        int[] binaryKey = fromStringToIntArray(fromStringToBinaryString(key));
+        int[] out = new int[binaryPlaintext.length];
 
-    //TODO implement
-    private static String decryptXOR(String ciphertext, String key) {
-
-        return null;
-    }
-
-
-    public static String toBinary(String input){
-        StringBuilder builder = new StringBuilder();
-
-        for (char c : input.toCharArray()){
-
-            String binaryString = Integer.toBinaryString(c);
-
-            while (binaryString.length() < 8)
-                binaryString += "0";
-
-            builder.append(binaryString);
+        for (int i = 0; i < binaryPlaintext.length; i++) {
+            //out[i] = binaryCiphertext[i] ^ binaryKey[i];
+            out[i] = (binaryPlaintext[i] == binaryKey[i]) ? 0 : 1;
+            //System.out.printf("%d XOR %d = %d\n", binaryCiphertext[i], binaryKey[i], out[i]);
         }
 
-        return builder.toString();
+        return fromBinaryStringToString(fromIntArrayToString(out));
+    }
+
+    private static String decryptXOR(String ciphertext, String key) {
+        return encryptXOR(ciphertext, key);
+    }
+
+    private static String encryptSubstitutionCipher(String plaintext, String key) throws IllegalArgumentException {
+
+        Map characterMapping = parsePermutation(key, false);
+
+        StringBuilder sb = new StringBuilder();
+
+        for (char c : plaintext.toCharArray()) {
+
+            if (characterMapping.keySet().contains(c)) sb.append(characterMapping.get(c));
+            else sb.append(c);
+        }
+
+        return sb.toString();
+    }
+
+    private static String decryptSubstitutionCipher(String ciphertext, String key) throws IllegalArgumentException {
+
+        Map characterMapping = parsePermutation(key, true);
+        StringBuilder sb = new StringBuilder();
+
+        for (char c : ciphertext.toCharArray()) {
+
+            if (characterMapping.keySet().contains(c)) sb.append(characterMapping.get(c));
+            else sb.append(c);
+        }
+
+        return sb.toString();
+    }
+
+    /*
+    Similar to substitution cipher, but here the permutation refers to the position of the character, so
+    (12) e.g. switches the first 2 chars
+     */
+    private static String encryptTranspositionCipher(String plaintext, String key) {
+
+        if (!key.matches("\\d+"))
+            throw new IllegalArgumentException("Badly formatted: Permutation for Transposition cipher can only contain integers");
+
+
+
+
+        return null;
+
+        // check that numbers are not out of bounds
+    }
+
+    private static String decryptTranspositionCipher(String ciphertext, String key) {
+        return null;
     }
 
 }
+
