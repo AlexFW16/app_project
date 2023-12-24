@@ -1,5 +1,6 @@
 package uk.bradford.app_project;
 
+import java.nio.channels.ScatteringByteChannel;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -48,12 +49,72 @@ public class Util {
     }
 
     // For substitution and transposition ciphers
+    public static HashMap<Integer, Integer> parsePermutationTransposition(String inputString, boolean reversed, int messageLength) {
+
+        char[] input = inputString.trim().toCharArray();
+
+        if (input[0] != '(' || input[input.length - 1] != ')')
+            throw new IllegalArgumentException("Badly formatted: Does not start with \'(\' or end with \')\'");
+
+        HashMap<Integer, Integer> cipherMapping = new HashMap<>();
+        HashSet<Integer> used = new HashSet<>();
+
+        String[] cycles = inputString.trim().substring(1, input.length - 1).split("\\)\\(");
+
+        for (String cycle : cycles) {
+            if (cycle.contains("(") || cycle.contains(")"))
+                throw new IllegalArgumentException("Badly formatted: Wrongly placed \'(\' or \')\'");
+            String[] numbersStrings = cycle.split(" ");
+
+            try {
+                if (reversed) {
+                    for (int i = numbersStrings.length - 1; i >= 0; i--) {
+
+                        int cur = Integer.valueOf(numbersStrings[i]) - 1; //
+                        int next = (i > 0) ? Integer.valueOf(numbersStrings[i - 1]) - 1 : Integer.valueOf(numbersStrings[numbersStrings.length - 1]) - 1;
+
+                        if (used.contains(cur))
+                            throw new IllegalArgumentException("Badly formatted: Value \'" + cur + "\' used more than once");
+
+                        if (cur >= messageLength)
+                            throw new IllegalArgumentException("Badly formatted: Value \'" + numbersStrings[i] + "\' is too big for message of size " + messageLength);
+
+                        cipherMapping.put(cur, next);
+                        used.add(Integer.valueOf(numbersStrings[i]));
+                    }
+                } else {
+                    for (int i = 0; i < numbersStrings.length; i++) {
+
+                        int cur = Integer.valueOf(numbersStrings[i]) - 1;
+                        int next = (i < numbersStrings.length - 1) ? Integer.valueOf(numbersStrings[i + 1]) - 1 : Integer.valueOf(numbersStrings[0]) - 1;
+
+                        if (used.contains(cur))
+                            throw new IllegalArgumentException("Badly formatted: Value \'" + numbersStrings[i] + "\' used more than once");
+
+                        if (cur >= messageLength)
+                            throw new IllegalArgumentException("Badly formatted: Value \'" + numbersStrings[i] + "\' is too big for message of size " + messageLength);
+
+                        cipherMapping.put(cur, next);
+
+
+                    }
+
+                }
+
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("Badly formatted: Only integers allowed");
+            }
+
+        }
+
+        return cipherMapping;
+    }
 
     /*
     Takes as input a permutation in the form of disjoint cycles and returns a HashMap
     of characters with the respective mappings.
      */
-    public static HashMap<Character, Character> parsePermutation(String inputString, boolean reversed) throws IllegalArgumentException {
+    public static HashMap<Character, Character> parsePermutationSubstitution(String inputString, boolean reversed) throws IllegalArgumentException {
 
         char[] input = inputString.trim().toCharArray();
 

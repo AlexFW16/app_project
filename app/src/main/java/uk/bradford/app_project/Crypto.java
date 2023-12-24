@@ -1,12 +1,11 @@
 package uk.bradford.app_project;
 
 
+import javax.swing.*;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeMap;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static uk.bradford.app_project.Util.*;
 
@@ -72,18 +71,18 @@ public class Crypto {
 
     public static String decrypt(Cipher cipher, String ciphertext, String key) {
 
+        if (!checkAlphabet(cipher, ciphertext + key))
+            throw new IllegalArgumentException("Contains letters that are not in the alphabet of this cipher");
         switch (cipher) {
 
             case VIGENERE:
-                checkAlphabet(cipher, ciphertext + key);
                 return decryptVigenere(ciphertext, key);
             case XOR:
-                checkAlphabet(cipher, ciphertext + key);
                 return decryptXOR(ciphertext, key);
             case SUBSTITUTION:
-                checkAlphabet(cipher, ciphertext + key);
                 return decryptSubstitutionCipher(ciphertext, key);
-
+            case TRANSPOSITION:
+                return decryptTranspositionCipher(ciphertext, key);
             default:
                 throw new IllegalArgumentException("Given Cipher does not exist or is not implemented (Decryption)");
 
@@ -121,7 +120,6 @@ public class Crypto {
                 .collect(Collectors.joining());
     }
 
-    // See encryptVigenere
     private static String decryptVigenere(String ciphertext, String key) {
 
         // make the key as long as the plaintext
@@ -144,7 +142,6 @@ public class Crypto {
 
     }
 
-    //TODO implement
     private static String encryptXOR(String plainText, String key) {
         key = keyToMessageLength(plainText, key);
 
@@ -167,7 +164,7 @@ public class Crypto {
 
     private static String encryptSubstitutionCipher(String plaintext, String key) throws IllegalArgumentException {
 
-        Map characterMapping = parsePermutation(key, false);
+        Map characterMapping = parsePermutationSubstitution(key, false);
 
         StringBuilder sb = new StringBuilder();
 
@@ -182,7 +179,7 @@ public class Crypto {
 
     private static String decryptSubstitutionCipher(String ciphertext, String key) throws IllegalArgumentException {
 
-        Map characterMapping = parsePermutation(key, true);
+        Map characterMapping = parsePermutationSubstitution(key, true);
         StringBuilder sb = new StringBuilder();
 
         for (char c : ciphertext.toCharArray()) {
@@ -199,20 +196,33 @@ public class Crypto {
     (12) e.g. switches the first 2 chars
      */
     private static String encryptTranspositionCipher(String plaintext, String key) {
+        Map<Integer, Integer> characterMapping = parsePermutationTransposition(key, false, plaintext.length());
+        char[] plaintextArray = plaintext.toCharArray();
+        char[] out = Arrays.copyOf(plaintextArray, plaintextArray.length);
 
-        if (!key.matches("\\d+"))
-            throw new IllegalArgumentException("Badly formatted: Permutation for Transposition cipher can only contain integers");
+        for (int i = 0; i < plaintext.length(); i++) {
+
+            if (characterMapping.keySet().contains(i))
+                out[characterMapping.get(i)] = plaintextArray[i];
+        }
+        return String.valueOf(out);
 
 
-
-
-        return null;
-
-        // check that numbers are not out of bounds
     }
 
     private static String decryptTranspositionCipher(String ciphertext, String key) {
-        return null;
+
+        Map<Integer, Integer> characterMapping = parsePermutationTransposition(key, true, ciphertext.length());
+        char[] ciphertextArray = ciphertext.toCharArray();
+        char[] out = Arrays.copyOf(ciphertextArray, ciphertextArray.length);
+
+        for (int i = 0; i < ciphertext.length(); i++){
+
+            if (characterMapping.keySet().contains(i))
+                out[characterMapping.get(i)] = ciphertextArray[i];
+        }
+
+        return String.valueOf(out);
     }
 
 }
