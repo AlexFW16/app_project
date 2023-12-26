@@ -7,6 +7,7 @@
     <string name="cipher5_button">Cipher 4</string>
     <string name="cipher6_button">Cipher 4</string>
 
+
     <string name="key_input">Put your key here</string>
     <!-- Those strings change at runtime-->
 
@@ -16,4 +17,5 @@
     <string name="cryption_output">Cipher or message</string>
     <string name="Encryption_btn">Encrypt</string>
     <string name="Decryption_btn">Decrypt</string>
+    <string name="Bio">GEH DOCH ESL SPIELEN DU BASTARD</string>
 </resources>

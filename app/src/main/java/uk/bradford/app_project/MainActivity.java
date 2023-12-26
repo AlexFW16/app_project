@@ -6,12 +6,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.material.navigation.NavigationView;
 import android.os.Bundle;
 import android.view.MenuItem;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-import com.google.android.material.navigation.NavigationView;
-import android.os.Bundle;
-import android.view.MenuItem;
+import androidx.fragment.app.Fragment;
 import androidx.appcompat.widget.Toolbar;
 
 public class MainActivity extends AppCompatActivity {
@@ -28,16 +23,20 @@ public class MainActivity extends AppCompatActivity {
 
             NavigationView navigationView = findViewById(R.id.nav_view);
             navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-                @Override
                 public boolean onNavigationItemSelected(MenuItem menuItem) {
                     // Handle navigation view item clicks here.
                     int id = menuItem.getItemId();
 
-                    if (id == R.id.nav_item1) {
-                        // Handle the action
+
+                    if (id == R.id.nav_item5) {
+
+                        Fragment aboutFragment = new AboutFragment();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, aboutFragment).commit();
                     }
 
-                    // Close the drawer
+                    // Handle other navigation items ...
+
+
                     drawerLayout.closeDrawer(GravityCompat.START);
                     return true;
                 }
@@ -45,9 +44,9 @@ public class MainActivity extends AppCompatActivity {
 
             Toolbar toolbar = findViewById(R.id.topAppBar);
             setSupportActionBar(toolbar);
-
+            getSupportActionBar().setTitle("");
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setHomeAsUpIndicator(R.drawable.baseline_menu_24); // Use your menu icon here
+            getSupportActionBar().setHomeAsUpIndicator(R.drawable.menuicon);
         }
 
         @Override
