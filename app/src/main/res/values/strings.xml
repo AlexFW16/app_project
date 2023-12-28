@@ -1,4 +1,6 @@
 <resources>
+
+    <!-- Will be removed bc starting screen will not be used! -->
     <string name="app_name">app_project</string>
     <string name="vigenere_button">Vigenere Cipher</string>
     <string name="cipher2_button">Cipher 2</string>
@@ -7,12 +9,26 @@
     <string name="cipher5_button">Cipher 4</string>
     <string name="cipher6_button">Cipher 4</string>
 
+    <!-- /////////////////////////////////////////////////// -->
 
+    <string name="Ciphers">Cipher App</string>
+
+    <!-- default values -->
+    <string name="default_vigenere_out">Output</string>
+    <string name="default_vigenere_key">Put your key here</string>
+    <string name="dummy_cipher">Cool Cipher </string>
     <string name="key_input">Put your key here</string>
+
+
+    <!-- Ciphers -->
+    <string name="cipher1_name"> Vigenere Cipher</string>
+    <string name="cipher2_name"> XOR Cipher</string>
+    <string name="cipher3_name"> Substitution Cipher</string>
+    <string name="cipher4_name"> Transposition Cipher</string>
+
+
     <!-- Those strings change at runtime-->
 
-    <string name="dummy_cipher">Cool Cipher </string>
-    <string name="Ciphers">Cipher App</string>
     <string name="cryption_input">Decryption/Encryption</string>
     <string name="cryption_output">Cipher or message</string>
     <string name="Encryption_btn">Encrypt</string>

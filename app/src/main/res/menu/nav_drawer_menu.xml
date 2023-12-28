@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/nav_item1"
-        android:title="page 1" />
+        android:title="@string/cipher1_name" />
     <item android:id="@+id/nav_item2"
-        android:title="page 2" />
+        android:title="@string/cipher2_name" />
     <item android:id="@+id/nav_item3"
-        android:title="page 3" />
+        android:title="@string/cipher3_name" />
     <item android:id="@+id/nav_item4"
+        android:title="@string/cipher4_name"/>
+
+    <item android:id="@+id/nav_item5"
         android:title="settings"
         android:drawableStart="@drawable/settings"/>
-    <item android:id="@+id/nav_item5"
-        android:title="about" />
+
     <item android:id="@+id/nav_item6"
-        android:title="anything tbh" />
+        android:title="about" />
 
 </menu>
