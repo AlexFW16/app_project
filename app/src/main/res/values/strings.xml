@@ -26,11 +26,13 @@
     <string name="cipher3_name"> Substitution Cipher</string>
     <string name="cipher4_name"> Transposition Cipher</string>
 
+    <string name="settings_name"> Settings </string>
+    <string name="about_name"> About </string>
+    <string name="toggle_binary"> Binary </string>
 
     <!-- Those strings change at runtime-->
-
-    <string name="cryption_input">Decryption/Encryption</string>
-    <string name="cryption_output">Cipher or message</string>
+    <string name="msg">Decryption/Encryption</string>
+    <string name="output">Cipher or message</string>
     <string name="Encryption_btn">Encrypt</string>
     <string name="Decryption_btn">Decrypt</string>
     <string name="Bio">GEH DOCH ESL SPIELEN DU BASTARD</string>

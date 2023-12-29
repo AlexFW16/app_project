@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -28,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
 
+    private TextView cipherTitleView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
+        cipherTitleView = findViewById(R.id.cipher_title);
 
 
         // Can be removed or changed, just for testing -> Works
@@ -77,32 +81,37 @@ public class MainActivity extends AppCompatActivity {
                 // Handle navigation view item clicks here.
                 int id = menuItem.getItemId();
 
-                //DEBUg
-                Log.e("onNavigationItemSelected", "onNavigationItemSelectedDDDDDDDDDDDDD");
-
-                Fragment fragment = null;
+                Fragment fragment;
 
                 if (id == R.id.nav_item1) {
                     fragment = new VigenereFragment();
+                    cipherTitleView.setText(R.string.cipher1_name);
+
                 } else if (id == R.id.nav_item2) {
                     fragment = new XORFragment();
+                    cipherTitleView.setText(R.string.cipher2_name);
 
                 } else if (id == R.id.nav_item3) {
 
                     fragment = new SubstitutionFragment();
+                    cipherTitleView.setText(R.string.cipher3_name);
                 } else if (id == R.id.nav_item4) {
 
                     fragment = new TranspositionFragment();
+                    cipherTitleView.setText(R.string.cipher4_name);
                 } else if (id == R.id.nav_item5) {
 
                     fragment = new SettingsFragment();
+                    cipherTitleView.setText(R.string.settings_name);
                 } else if (id == R.id.nav_item6) {
                     fragment = new AboutFragment();
+                    cipherTitleView.setText(R.string.about_name);
 
                 } else {
                     Log.e("NavigationView", "Invalid menu item id");
                     fragment = null;
                 }
+
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
 
 

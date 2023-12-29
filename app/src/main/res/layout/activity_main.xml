@@ -11,7 +11,7 @@
         android:layout_height="0dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/button"
-        app:layout_constraintTop_toBottomOf="@+id/ciphersTextView"
+        app:layout_constraintTop_toBottomOf="@+id/cipher_title"
         tools:layout_editor_absoluteX="0dp">
 
         <LinearLayout
@@ -94,7 +94,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/ciphersTextView"
+        android:id="@+id/cipher_title"
         android:layout_width="122dp"
         android:layout_height="56dp"
         android:layout_marginTop="8dp"

@@ -27,6 +27,7 @@ Help people learn/understand how cryptography works in an intuitive and easy way
 - Template activity for standard ciphers, must be adapted depending on which cipher is used at runtime
 - Make input fields, etc. look nice
 - Make 2 colour schemes, one for decrypting and one for encrypting
+- Add another fragment (bottom) that is used to display more detailed information (xor: binary code, ...)
 
 #### Notes
 
