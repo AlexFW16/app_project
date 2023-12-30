@@ -36,7 +36,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_standard_cipher);
 
-        Fragment aboutFragment = new VigenereFragment();
+        // Starting screen fragment
+        Fragment aboutFragment = new AboutFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, aboutFragment).commit();
 
         //DEBUG
@@ -85,27 +86,21 @@ public class MainActivity extends AppCompatActivity {
 
                 if (id == R.id.nav_item1) {
                     fragment = new VigenereFragment();
-                    cipherTitleView.setText(R.string.cipher1_name);
 
                 } else if (id == R.id.nav_item2) {
                     fragment = new XORFragment();
-                    cipherTitleView.setText(R.string.cipher2_name);
 
                 } else if (id == R.id.nav_item3) {
 
                     fragment = new SubstitutionFragment();
-                    cipherTitleView.setText(R.string.cipher3_name);
                 } else if (id == R.id.nav_item4) {
 
                     fragment = new TranspositionFragment();
-                    cipherTitleView.setText(R.string.cipher4_name);
                 } else if (id == R.id.nav_item5) {
-
                     fragment = new SettingsFragment();
-                    cipherTitleView.setText(R.string.settings_name);
+
                 } else if (id == R.id.nav_item6) {
                     fragment = new AboutFragment();
-                    cipherTitleView.setText(R.string.about_name);
 
                 } else {
                     Log.e("NavigationView", "Invalid menu item id");

@@ -10,6 +10,15 @@
         android:orientation="vertical"
         android:padding="16dp">
 
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/about_name"
+            android:textSize="34sp" />
+
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -20,10 +29,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:layout_gravity="center"
-            android:textSize="24sp"
-            android:text="@string/dummy_cipher" />
+            android:layout_marginTop="16dp"
+            android:text="@string/app_name"
+            android:textSize="24sp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -38,7 +47,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:text="@string/Bio"
+            android:text="@string/about_bio"
             android:textSize="16sp" />
 
         <!-- Add more TextViews or other views as needed for additional information -->

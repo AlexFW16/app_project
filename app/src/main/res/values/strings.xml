@@ -1,39 +1,58 @@
 <resources>
 
     <!-- Will be removed bc starting screen will not be used! -->
-    <string name="app_name">app_project</string>
     <string name="vigenere_button">Vigenere Cipher</string>
     <string name="cipher2_button">Cipher 2</string>
     <string name="cipher3_button">Cipher 3</string>
     <string name="cipher4_button">Cipher 4</string>
     <string name="cipher5_button">Cipher 4</string>
     <string name="cipher6_button">Cipher 4</string>
+    <!--                                                  -->
 
-    <!-- /////////////////////////////////////////////////// -->
 
-    <string name="Ciphers">Cipher App</string>
+    <!-- general -->
+    <string name="app_name">0xCrypt</string>
 
-    <!-- default values -->
-    <string name="default_vigenere_out">Output</string>
-    <string name="default_vigenere_key">Put your key here</string>
-    <string name="dummy_cipher">Cool Cipher </string>
-    <string name="key_input">Put your key here</string>
 
+    <!-- settings -->
+    <string name="settings_name"> Settings </string>
+
+    <!-- about -->
+    <string name="about_name"> About </string>
+    <string name="about_bio">GEH DOCH ESL SPIELEN DU BASTARD</string>
 
     <!-- Ciphers -->
+    <!-- Vigenere -->
     <string name="cipher1_name"> Vigenere Cipher</string>
+    <string name="cipher1_msg">Decryption/Encryption</string>
+    <string name="cipher1_key">Decryption/Encryption</string>
+    <string name="cipher1_encryption_btn">Encrypt</string>
+    <string name="cipher1_decryption_btn">Decrypt</string>
+    <string name="cipher1_output">Cipher or message</string>
+
+    <!-- XOR -->
     <string name="cipher2_name"> XOR Cipher</string>
+    <string name="cipher2_msg">Decryption/Encryption</string>
+    <string name="cipher2_key">Decryption/Encryption</string>
+    <string name="cipher2_encryption_btn">Encrypt</string>
+    <string name="cipher2_decryption_btn">Decrypt</string>
+    <string name="cipher2_output">Cipher or message</string>
+
+    <string name="cipher2_toggle_binary"> Binary </string>
+
+    <!-- Substitution-->
     <string name="cipher3_name"> Substitution Cipher</string>
+    <string name="cipher3_msg">Decryption/Encryption</string>
+    <string name="cipher3_key">Decryption/Encryption</string>
+    <string name="cipher3_encryption_btn">Encrypt</string>
+    <string name="cipher3_decryption_btn">Decrypt</string>
+    <string name="cipher3_output">Cipher or message</string>
+
+    <!-- Transposition -->
     <string name="cipher4_name"> Transposition Cipher</string>
-
-    <string name="settings_name"> Settings </string>
-    <string name="about_name"> About </string>
-    <string name="toggle_binary"> Binary </string>
-
-    <!-- Those strings change at runtime-->
-    <string name="msg">Decryption/Encryption</string>
-    <string name="output">Cipher or message</string>
-    <string name="Encryption_btn">Encrypt</string>
-    <string name="Decryption_btn">Decrypt</string>
-    <string name="Bio">GEH DOCH ESL SPIELEN DU BASTARD</string>
+    <string name="cipher4_msg">Decryption/Encryption</string>
+    <string name="cipher4_key">Decryption/Encryption</string>
+    <string name="cipher4_encryption_btn">Encrypt</string>
+    <string name="cipher4_decryption_btn">Decrypt</string>
+    <string name="cipher4_output">Cipher or message</string>
 </resources>

@@ -28,11 +28,11 @@ public class TranspositionFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView =  inflater.inflate(R.layout.transposition, container, false);
 
-        encryptBtn = rootView.findViewById(R.id.transposition_encrypt);
-        decryptBtn = rootView.findViewById(R.id.transposition_decrypt);
-        keyEditText = rootView.findViewById(R.id.xor_key);
-        msgEditText= rootView.findViewById(R.id.xor_msg);
-        outputTextView = rootView.findViewById(R.id.substitution_out);
+        encryptBtn = rootView.findViewById(R.id.encrypt);
+        decryptBtn = rootView.findViewById(R.id.decrypt);
+        keyEditText = rootView.findViewById(R.id.key);
+        msgEditText= rootView.findViewById(R.id.msg);
+        outputTextView = rootView.findViewById(R.id.out);
 
         // Set the listeners
 

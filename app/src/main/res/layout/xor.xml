@@ -17,21 +17,29 @@
 
         <!-- existing AppBarLayout, Toolbar, and other views -->
 
-        <EditText
-            android:id="@+id/xor_key"
+        <TextView
+            android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="text"
-            android:text="@string/key_input" />
+            android:gravity="center"
+            android:text="@string/cipher2_name"
+            android:textSize="34sp" />
 
         <EditText
-            android:id="@+id/xor_msg"
+            android:id="@+id/key"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="text"
-            android:text="@string/msg" />
+            android:text="@string/cipher2_key" />
+
+        <EditText
+            android:id="@+id/msg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="text"
+            android:text="@string/cipher2_msg" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -40,43 +48,43 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/xor_encrypt"
+                android:id="@+id/encrypt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="69dp"
                 android:drawableStart="@android:drawable/ic_lock_lock"
                 android:drawablePadding="8dp"
                 android:drawableTint="#FFFFFF"
-                android:text="@string/Encryption_btn" />
+                android:text="@string/cipher1_encryption_btn" />
 
             <Button
-                android:id="@+id/xor_toggle_binary"
+                android:id="@+id/toggle_binary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawableStart="@android:drawable/ic_lock_lock"
                 android:drawableTint="#FFFFFF"
-                android:text="@string/toggle_binary" />
+                android:text="@string/cipher2_toggle_binary" />
 
             <Button
-                android:id="@+id/xor_decrypt"
+                android:id="@+id/decrypt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="69dp"
                 android:drawableStart="@drawable/baseline_lock_24"
                 android:drawablePadding="8dp"
                 android:drawableTint="#FFFFFF"
-                android:text="@string/Decryption_btn" />
+                android:text="@string/cipher2_decryption_btn" />
         </LinearLayout>
 
         <TextView
-            android:id="@+id/xor_out"
+            android:id="@+id/out"
             android:layout_width="380dp"
             android:layout_height="294dp"
             android:layout_margin="16dp"
             android:background="#FFFFFFFF"
-            android:gravity="top|left"
+            android:gravity="top|center"
             android:padding="4dp"
-            android:text="Cipher or message here"
+            android:text="@string/cipher2_output"
             android:textColor="#000000"
             android:textIsSelectable="true"
             android:textSize="18sp" />

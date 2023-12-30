@@ -1,6 +1,7 @@
 package uk.bradford.app_project.fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -8,9 +9,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
+import uk.bradford.app_project.Cipher;
+import uk.bradford.app_project.Crypto;
 import uk.bradford.app_project.R;
 
 public class SubstitutionFragment extends Fragment {
@@ -22,17 +26,16 @@ public class SubstitutionFragment extends Fragment {
     private TextView outputTextView;
 
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView =  inflater.inflate(R.layout.transposition, container, false);
+        View rootView = inflater.inflate(R.layout.substitution, container, false);
 
-        encryptBtn = rootView.findViewById(R.id.transposition_encrypt);
-        decryptBtn = rootView.findViewById(R.id.transposition_decrypt);
-        keyEditText = rootView.findViewById(R.id.xor_key);
-        msgEditText= rootView.findViewById(R.id.xor_msg);
-        outputTextView = rootView.findViewById(R.id.substitution_out);
+        encryptBtn = rootView.findViewById(R.id.encrypt);
+        decryptBtn = rootView.findViewById(R.id.decrypt);
+        keyEditText = rootView.findViewById(R.id.key);
+        msgEditText = rootView.findViewById(R.id.msg);
+        outputTextView = rootView.findViewById(R.id.out);
 
         // Set the listeners
 
@@ -47,24 +50,41 @@ public class SubstitutionFragment extends Fragment {
 
 
     //TODO implement
-    private void onEncryptButtonClick(View v){
+    private void onEncryptButtonClick(View v) {
+
+        try {
+            String encryptedText = Crypto.encrypt(Cipher.SUBSTITUTION, msgEditText.getText().toString(), keyEditText.getText().toString());
+            outputTextView.setText(encryptedText);
+        } catch (IllegalArgumentException e) {
+            Toast.makeText(getContext(), "Badly formatted input, see help", Toast.LENGTH_LONG);
+            Log.e("IllegalArgumentException", e.getMessage());
+        }
 
     }
-    private void onDecryptButtonClick(View v){
+
+    private void onDecryptButtonClick(View v) {
+        try {
+            String decryptedText = Crypto.decrypt(Cipher.SUBSTITUTION, msgEditText.getText().toString(), keyEditText.getText().toString());
+            outputTextView.setText(decryptedText);
+        } catch (IllegalArgumentException e) {
+            Toast.makeText(getContext(), "Badly formatted input, see help", Toast.LENGTH_LONG);
+            Log.e("IllegalArgumentException", e.getMessage());
+
+        }
 
     }
 
-    private void onKeyEditTextClick(View v){
+    private void onKeyEditTextClick(View v) {
 
         //if (keyEditText.getText().toString().length() == getResources().getString(R.string.default_vigenere_key).length())
-            keyEditText.setText("");
+        keyEditText.setText("");
     }
 
-    public boolean onKeyEditTextTouch(View v, MotionEvent e){ // could be used later to let default text disappear
+    public boolean onKeyEditTextTouch(View v, MotionEvent e) { // could be used later to let default text disappear
         return true;
     }
 
-    private void onMsgEditTextClick(View v){
+    private void onMsgEditTextClick(View v) {
 
     }
 }

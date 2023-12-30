@@ -33,12 +33,12 @@ public class XORFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.xor, container, false);
 
-        encryptBtn = rootView.findViewById(R.id.xor_encrypt);
-        decryptBtn = rootView.findViewById(R.id.xor_decrypt);
-        toggleBinaryButton = rootView.findViewById(R.id.xor_toggle_binary);
-        keyEditText = rootView.findViewById(R.id.xor_key);
-        msgEditText = rootView.findViewById(R.id.xor_msg);
-        outputTextView = rootView.findViewById(R.id.xor_out);
+        encryptBtn = rootView.findViewById(R.id.encrypt);
+        decryptBtn = rootView.findViewById(R.id.decrypt);
+        toggleBinaryButton = rootView.findViewById(R.id.toggle_binary);
+        keyEditText = rootView.findViewById(R.id.key);
+        msgEditText = rootView.findViewById(R.id.msg);
+        outputTextView = rootView.findViewById(R.id.out);
 
         isBinaryOut = false;
 
