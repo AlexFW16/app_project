@@ -2,13 +2,13 @@
 **Try out how the basic ciphers work**
 
 ### What it must contain
-- [] Comprise of good quality UI with at least two fragments separating all the components.
--  [] Use the activity life cycle states through its various methods (such as onStart, onPause, onDestroy,
+- [ ] Comprise of good quality UI with at least two fragments separating all the components.
+-  [ ] Use the activity life cycle states through its various methods (such as onStart, onPause, onDestroy,
 etc.).
-- [] Utilise at least one: device location/ Google Maps/ Media player/ Camera/ microphone/ any native
+- [ ] Utilise at least one: device location/ Google Maps/ Media player/ Camera/ microphone/ any native
 android apps, service, sensor, or sensor API.
-- [] Use persistence data storage (e.g. SQLite, ROOM/ Firebase/Firestore, etc.).
-- [] Use MVC or similar (java-based frameworks such as MVP, MVVM, etc.) framework.
+- [ ] Use persistence data storage (e.g. SQLite, ROOM/ Firebase/Firestore, etc.).
+- [ ] Use MVC or similar (java-based frameworks such as MVP, MVVM, etc.) framework.
 
 
 ### TODO
