@@ -51,7 +51,7 @@ public class Util {
     // For substitution and transposition ciphers
     public static HashMap<Integer, Integer> parsePermutationTransposition(String inputString, boolean reversed, int messageLength) {
 
-        char[] input = inputString.trim().toCharArray();
+        char[] input = inputString.replaceAll("\\)\\s+\\(", ")(").toCharArray();
 
         if (input[0] != '(' || input[input.length - 1] != ')')
             throw new IllegalArgumentException("Badly formatted: Does not start with \'(\' or end with \')\'");
@@ -59,7 +59,7 @@ public class Util {
         HashMap<Integer, Integer> cipherMapping = new HashMap<>();
         HashSet<Integer> used = new HashSet<>();
 
-        String[] cycles = inputString.trim().substring(1, input.length - 1).split("\\)\\(");
+        String[] cycles = inputString.replaceAll("\\)\\s+\\(", ")(").substring(1, input.length - 1).split("\\)\\(");
 
         for (String cycle : cycles) {
             if (cycle.contains("(") || cycle.contains(")"))
@@ -116,7 +116,8 @@ public class Util {
      */
     public static HashMap<Character, Character> parsePermutationSubstitution(String inputString, boolean reversed) throws IllegalArgumentException {
 
-        char[] input = inputString.trim().toCharArray();
+        // also replaces all whitespaces in the permutation (cannot be used for tranposition as whitespaces there are used to seperate numbers)
+        char[] input = inputString.replaceAll("\\)\\s+\\(", ")(").toCharArray();
 
 
         // must start and end with bracket
@@ -126,7 +127,7 @@ public class Util {
         HashMap<Character, Character> cipherMapping = new HashMap<>();
         HashSet<Character> used = new HashSet<>(); // used to efficiently check if char is used multiple times
 
-        String[] cycles = inputString.trim().substring(1, input.length - 1).split("\\)\\(");
+        String[] cycles = inputString.replaceAll("\\)\\s+\\(", ")(").substring(1, input.length - 1).split("\\)\\(");
 
         /*
          creating the cipherMapping from the cycles and checking for remaining brackets, which would mean

@@ -30,6 +30,7 @@ Help people learn/understand how cryptography works in an intuitive and easy way
 - Add another fragment (bottom) that is used to display more detailed information (xor: binary code, ...)
 - Weird that the fragments change their id's, probably bc they are the same and get overriden on change or smth? 
   -> Just use the same id for the same buttons etc.
+- Add switch button (output text and msg)
 
 #### Notes
 

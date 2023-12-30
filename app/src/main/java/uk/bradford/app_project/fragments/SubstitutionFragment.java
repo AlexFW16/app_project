@@ -41,8 +41,8 @@ public class SubstitutionFragment extends Fragment {
 
         encryptBtn.setOnClickListener(this::onEncryptButtonClick);
         decryptBtn.setOnClickListener(this::onDecryptButtonClick);
-        keyEditText.setOnClickListener(this::onKeyEditTextClick);
-        keyEditText.setOnTouchListener(this::onKeyEditTextTouch);
+        //keyEditText.setOnClickListener(this::onKeyEditTextClick);
+        //keyEditText.setOnTouchListener(this::onKeyEditTextTouch);
         msgEditText.setOnClickListener(this::onMsgEditTextClick);
 
         return rootView;
@@ -64,7 +64,11 @@ public class SubstitutionFragment extends Fragment {
 
     private void onDecryptButtonClick(View v) {
         try {
+            Log.w("Sub:", msgEditText.getText().toString());
+            Log.w("Sub:", keyEditText.getText().toString());
             String decryptedText = Crypto.decrypt(Cipher.SUBSTITUTION, msgEditText.getText().toString(), keyEditText.getText().toString());
+            Log.w("Out", decryptedText);
+
             outputTextView.setText(decryptedText);
         } catch (IllegalArgumentException e) {
             Toast.makeText(getContext(), "Badly formatted input, see help", Toast.LENGTH_LONG);
@@ -74,15 +78,10 @@ public class SubstitutionFragment extends Fragment {
 
     }
 
-    private void onKeyEditTextClick(View v) {
+    //private void onKeyEditTextClick(View v) {}
 
-        //if (keyEditText.getText().toString().length() == getResources().getString(R.string.default_vigenere_key).length())
-        keyEditText.setText("");
-    }
 
-    public boolean onKeyEditTextTouch(View v, MotionEvent e) { // could be used later to let default text disappear
-        return true;
-    }
+    //public boolean onKeyEditTextTouch(View v, MotionEvent e) { }// could be used later to let default text disappear
 
     private void onMsgEditTextClick(View v) {
 
