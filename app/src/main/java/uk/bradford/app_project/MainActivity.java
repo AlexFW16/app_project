@@ -6,7 +6,10 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -29,6 +32,9 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
 
+    private FirebaseAuth mAuth;
+    private FirebaseUser user;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,36 +50,10 @@ public class MainActivity extends AppCompatActivity {
 
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
+        mAuth = FirebaseAuth.getInstance();
+        user = mAuth.getCurrentUser();
 
 
-        // Can be removed or changed, just for testing -> Works
-        drawerLayout.addDrawerListener(new DrawerLayout.DrawerListener() {
-            @Override
-            public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {
-
-            }
-
-            @Override
-            public void onDrawerOpened(@NonNull View drawerView) {
-                Toast.makeText(getApplicationContext(), "MESSAGELA:DLFKJ:SLDKFJ:SLDKFJ:", Toast.LENGTH_LONG).show();
-                // still not working
-
-            }
-
-            @Override
-            public void onDrawerClosed(@NonNull View drawerView) {
-
-            }
-
-            @Override
-            public void onDrawerStateChanged(int newState) {
-
-            }
-        });
-        /* Added:
-        android:enableOnBackInvokedCallback="true" in manifest bc of warning
-        Is apparently an opt-in for hand gestures
-         */
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             public boolean onNavigationItemSelected(MenuItem menuItem) {
                 // Handle navigation view item clicks here.
@@ -94,10 +74,12 @@ public class MainActivity extends AppCompatActivity {
 
                     fragment = new TranspositionFragment();
                 } else if (id == R.id.nav_item5) {
-                    fragment = new SettingsFragment();
+                    fragment = new SettingsFragment(user);
 
                 } else if (id == R.id.nav_item6) {
                     fragment = new AboutFragment();
+                } else if (id == R.id.nav_item7) {
+                    return logout(user);
 
                 } else {
                     Log.e("NavigationView", "Invalid menu item id");
@@ -119,6 +101,15 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.menuicon);
     }
 
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (user == null)  // goes back to the login activity if user is not logged in
+            returnToLogin();
+
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
@@ -126,6 +117,23 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private boolean logout(FirebaseUser user) {
+        if (user == null) {
+            Log.e("Logout", "User is null");
+            return false;
+        } else {
+            mAuth.signOut();
+            returnToLogin();
+            return true;
+        }
+    }
+
+    private void returnToLogin() {
+        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+        startActivity(intent);
+        finish();
     }
 }
 

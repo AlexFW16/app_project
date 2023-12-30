@@ -12,6 +12,7 @@
 
     <!-- general -->
     <string name="app_title">0xCrypt</string>
+    <string name="logout_title"> Logout</string>
 
      <!-- Login -->
     <string name="login_title">Login</string>
