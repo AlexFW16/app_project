@@ -18,11 +18,8 @@ import uk.bradford.app_project.R;
 
 public class VigenereFragment extends Fragment {
 
-    private Button encryptBtn;
-    private Button decryptBtn;
-    private EditText keyEditText;
-    private EditText msgEditText;
-
+    private Button encryptBtn, decryptBtn;
+    private EditText keyEditText, msgEditText;
     private TextView outputTextView;
 
 

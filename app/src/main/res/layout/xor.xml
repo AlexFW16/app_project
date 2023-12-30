@@ -22,7 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="@string/cipher2_name"
+            android:text="@string/cipher2_title"
             android:textSize="34sp" />
 
         <EditText

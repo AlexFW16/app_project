@@ -11,19 +11,34 @@
 
 
     <!-- general -->
-    <string name="app_name">0xCrypt</string>
+    <string name="app_title">0xCrypt</string>
+
+     <!-- Login -->
+    <string name="login_title">Login</string>
+    <string name="login_email_hint">Email</string>
+    <string name="login_password_hint">Password</string>
+    <string name="login_login_button">Login</string>
+    <string name="login_register_button">To Registration</string>
+
+
+    <!-- Registration -->
+    <string name="registration_title">Register</string>
+    <string name="registration_email_hint">Email</string>
+    <string name="registration_password_hint">Password</string>
+    <string name="registration_register_button">Register</string>
+    <string name="registration_back_button">Back to Login</string>
 
 
     <!-- settings -->
-    <string name="settings_name"> Settings </string>
+    <string name="settings_title"> Settings </string>
 
     <!-- about -->
-    <string name="about_name"> About </string>
+    <string name="about_title"> About </string>
     <string name="about_bio">GEH DOCH ESL SPIELEN DU BASTARD</string>
 
     <!-- Ciphers -->
     <!-- Vigenere -->
-    <string name="cipher1_name"> Vigenere Cipher</string>
+    <string name="cipher1_title"> Vigenere Cipher</string>
     <string name="cipher1_msg">Decryption/Encryption</string>
     <string name="cipher1_key">Decryption/Encryption</string>
     <string name="cipher1_encryption_btn">Encrypt</string>
@@ -31,7 +46,7 @@
     <string name="cipher1_output">Cipher or message</string>
 
     <!-- XOR -->
-    <string name="cipher2_name"> XOR Cipher</string>
+    <string name="cipher2_title"> XOR Cipher</string>
     <string name="cipher2_msg">Decryption/Encryption</string>
     <string name="cipher2_key">Decryption/Encryption</string>
     <string name="cipher2_encryption_btn">Encrypt</string>
@@ -41,7 +56,7 @@
     <string name="cipher2_toggle_binary"> Binary </string>
 
     <!-- Substitution-->
-    <string name="cipher3_name"> Substitution Cipher</string>
+    <string name="cipher3_title"> Substitution Cipher</string>
     <string name="cipher3_msg">Decryption/Encryption</string>
     <string name="cipher3_key">Decryption/Encryption</string>
     <string name="cipher3_encryption_btn">Encrypt</string>
@@ -49,7 +64,7 @@
     <string name="cipher3_output">Cipher or message</string>
 
     <!-- Transposition -->
-    <string name="cipher4_name"> Transposition Cipher</string>
+    <string name="cipher4_title"> Transposition Cipher</string>
     <string name="cipher4_msg">Decryption/Encryption</string>
     <string name="cipher4_key">Decryption/Encryption</string>
     <string name="cipher4_encryption_btn">Encrypt</string>

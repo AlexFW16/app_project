@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "836820301571",
+    "project_id": "cipher-app-1db1d",
+    "storage_bucket": "cipher-app-1db1d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:836820301571:android:cf6e31d58e57025286db36",
+        "android_client_info": {
+          "package_name": "uk.bradford.app_project"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCVmDfPj0ISZcMVAbpfoOayBz2_ZYbd6BQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

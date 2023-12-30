@@ -17,13 +17,9 @@ import uk.bradford.app_project.R;
 import uk.bradford.app_project.Util;
 
 public class XORFragment extends Fragment {
-    private Button encryptBtn;
-    private Button decryptBtn;
+    private Button encryptBtn, decryptBtn, toggleBinaryButton;
 
-    private Button toggleBinaryButton;
-    private EditText keyEditText;
-    private EditText msgEditText;
-
+    private EditText keyEditText, msgEditText;
     private TextView outputTextView;
 
     private boolean isBinaryOut;
@@ -76,6 +72,7 @@ public class XORFragment extends Fragment {
         }
 
     }
+
     private void onToggleBinaryButtonClick(View v) {
 
         if (isBinaryOut)
