@@ -1,4 +1,24 @@
-# App to test simple ciphers
+# 0xCrypt
+**Try out how the basic ciphers work**
+
+### What it must contain
+- [ ] Comprise of good quality UI with at least two fragments separating all the components.
+-  [ ] Use the activity life cycle states through its various methods (such as onStart, onPause, onDestroy,
+etc.).
+- [ ] Utilise at least one: device location/ Google Maps/ Media player/ Camera/ microphone/ any native
+android apps, service, sensor, or sensor API.
+- [ ] Use persistence data storage (e.g. SQLite, ROOM/ Firebase/Firestore, etc.).
+- [ ] Use MVC or similar (java-based frameworks such as MVP, MVVM, etc.) framework.
+
+
+### TODO
+- Template activity for standard ciphers, must be adapted depending on which cipher is used at runtime
+- Make input fields, etc. look nice
+- Make 2 colour schemes, one for decrypting and one for encrypting
+- Add another fragment (bottom) that is used to display more detailed information (xor: binary code, ...)
+- Weird that the fragments change their id's, probably bc they are the same and get overriden on change or smth? 
+  -> Just use the same id for the same buttons etc.
+- Add switch button (output text and msg)
 
 
 ### How is MVC implemented?
@@ -8,33 +28,15 @@
   the Controller sends the information to the model class, the model class
   encrypts/decrypts with given params and the controller returns the result
 
-#### Basic Design Idea
-![figma draft](https://github.com/alexfw16/app_project/blob/master/img/figma_first_draft.png?raw=true)
 
-
-#### Case Study / Problem
+### Case Study / Problem
 Help people learn/understand how cryptography works in an intuitive and easy way.
 
-#### Plan
-1. Make the necessary XML layouts
-2. Create background logic (Model)
-3. Make it functional: Implement Controller
-4. Small stuff, bug fixing, etc.
-5. Make it look good
-6. add more content
 
-#### TODO
-- Template activity for standard ciphers, must be adapted depending on which cipher is used at runtime
-- Make input fields, etc. look nice
-- Make 2 colour schemes, one for decrypting and one for encrypting
-- Add another fragment (bottom) that is used to display more detailed information (xor: binary code, ...)
-- Weird that the fragments change their id's, probably bc they are the same and get overriden on change or smth? 
-  -> Just use the same id for the same buttons etc.
-- Add switch button (output text and msg)
 
-#### Notes
+## Notes
 
-##### Layouts
+#### Layouts
 - One vertical linear layout, with horizontal linear layouts (2-3 image buttons for ciphers)
 - each horizontal layout: wrap_content for vertical to not push away to other horizontals
 - use match_parent for horizontal, to fully cover the screen
@@ -43,7 +45,7 @@ Help people learn/understand how cryptography works in an intuitive and easy way
 - Rounded corners: https://stackoverflow.com/questions/21633637/rounded-corners-android-image-buttons
 -
 
-##### Other Notes
+#### Other Notes
 
 To center text fields inside a **constraint layout**, you can use:
 
