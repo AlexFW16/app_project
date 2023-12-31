@@ -1,6 +1,5 @@
 package uk.bradford.app_project;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -13,8 +12,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -54,45 +51,7 @@ public class MainActivity extends AppCompatActivity {
         user = mAuth.getCurrentUser();
 
 
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            public boolean onNavigationItemSelected(MenuItem menuItem) {
-                // Handle navigation view item clicks here.
-                int id = menuItem.getItemId();
-
-                Fragment fragment;
-
-                if (id == R.id.nav_item1) {
-                    fragment = new VigenereFragment();
-
-                } else if (id == R.id.nav_item2) {
-                    fragment = new XORFragment();
-
-                } else if (id == R.id.nav_item3) {
-
-                    fragment = new SubstitutionFragment();
-                } else if (id == R.id.nav_item4) {
-
-                    fragment = new TranspositionFragment();
-                } else if (id == R.id.nav_item5) {
-                    fragment = new SettingsFragment(user);
-
-                } else if (id == R.id.nav_item6) {
-                    fragment = new AboutFragment();
-                } else if (id == R.id.nav_item7) {
-                    return logout(user);
-
-                } else {
-                    Log.e("NavigationView", "Invalid menu item id");
-                    fragment = null;
-                }
-
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
-
-
-                drawerLayout.closeDrawer(GravityCompat.START);
-                return true;
-            }
-        });
+        navigationView.setNavigationItemSelectedListener(this::onNavigationViewItemSelected);
 
         Toolbar toolbar = findViewById(R.id.topAppBar);
         setSupportActionBar(toolbar);
@@ -119,6 +78,43 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private boolean onNavigationViewItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+        Fragment fragment;
+
+        if (id == R.id.nav_item1) {
+            fragment = new VigenereFragment();
+
+        } else if (id == R.id.nav_item2) {
+            fragment = new XORFragment();
+
+        } else if (id == R.id.nav_item3) {
+
+            fragment = new SubstitutionFragment();
+        } else if (id == R.id.nav_item4) {
+
+            fragment = new TranspositionFragment();
+        } else if (id == R.id.nav_item5) {
+            fragment = new SettingsFragment(user);
+
+        } else if (id == R.id.nav_item6) {
+            fragment = new AboutFragment();
+        } else if (id == R.id.nav_item7) {
+            return logout(user);
+
+        } else {
+            Log.e("NavigationView", "Invalid menu item id");
+            fragment = null;
+        }
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
+        drawerLayout.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
+
+    // Firebase
     private boolean logout(FirebaseUser user) {
         if (user == null) {
             Log.e("Logout", "User is null");

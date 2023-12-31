@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="text"
-            android:text="@string/cipher2_key" />
+            android:hint="@string/cipher2_key" />
 
         <EditText
             android:id="@+id/msg"

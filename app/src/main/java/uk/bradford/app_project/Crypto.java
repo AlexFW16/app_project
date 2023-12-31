@@ -52,6 +52,9 @@ public class Crypto {
 
         if (!checkAlphabet(cipher, plaintext + key))
             throw new IllegalArgumentException("Contains letters that are not in the alphabet of this cipher");
+        if (plaintext.trim().equals("") || key.trim().equals(""))
+            throw new IllegalArgumentException("Key or plaintext cannot be empty");
+
 
         switch (cipher) {
 
@@ -73,6 +76,10 @@ public class Crypto {
 
         if (!checkAlphabet(cipher, ciphertext + key))
             throw new IllegalArgumentException("Contains letters that are not in the alphabet of this cipher");
+
+        if (ciphertext.trim().equals("") || key.trim().equals(""))
+            throw new IllegalArgumentException("Key or plaintext cannot be empty");
+
         switch (cipher) {
 
             case VIGENERE:

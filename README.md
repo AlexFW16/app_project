@@ -19,6 +19,7 @@ android apps, service, sensor, or sensor API.
 - Weird that the fragments change their id's, probably bc they are the same and get overriden on change or smth? 
   -> Just use the same id for the same buttons etc.
 - Add switch button (output text and msg)
+- Descriptions/how to use for all ciphers
 
 
 ### How is MVC implemented?
