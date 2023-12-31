@@ -17,11 +17,7 @@ import uk.bradford.app_project.Cipher;
 import uk.bradford.app_project.Crypto;
 import uk.bradford.app_project.R;
 
-public class SubstitutionFragment extends Fragment {
-    private Button encryptBtn, decryptBtn;
-    private EditText keyEditText, msgEditText;
-
-    private TextView outputTextView;
+public class SubstitutionFragment extends CipherFragment {
 
 
     @Override
@@ -46,6 +42,8 @@ public class SubstitutionFragment extends Fragment {
         return rootView;
     }
 
+    @Override
+    protected Cipher getCipher() { return Cipher.SUBSTITUTION;}
 
     //TODO implement
     private void onEncryptButtonClick(View v) {

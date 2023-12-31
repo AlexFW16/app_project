@@ -16,12 +16,7 @@ import uk.bradford.app_project.Cipher;
 import uk.bradford.app_project.Crypto;
 import uk.bradford.app_project.R;
 
-public class VigenereFragment extends Fragment {
-
-    private Button encryptBtn, decryptBtn;
-    private EditText keyEditText, msgEditText;
-    private TextView outputTextView;
-
+public class VigenereFragment extends CipherFragment {
 
 
     @Override
@@ -39,13 +34,13 @@ public class VigenereFragment extends Fragment {
 
         encryptBtn.setOnClickListener(this::onEncryptButtonClick);
         decryptBtn.setOnClickListener(this::onDecryptButtonClick);
-        keyEditText.setOnClickListener(this::onKeyEditTextClick);
         //keyEditText.setOnTouchListener(this::onKeyEditTextTouch);
-        msgEditText.setOnClickListener(this::onMsgEditTextClick);
 
         return rootView;
     }
 
+    @Override
+    protected Cipher getCipher() { return Cipher.VIGENERE;}
 
     //TODO implement
     private void onEncryptButtonClick(View v){
@@ -72,18 +67,9 @@ public class VigenereFragment extends Fragment {
             Log.e("IllegalArgumentException", e.getMessage());
         }   }
 
-    private void onKeyEditTextClick(View v){
 
-        //if (keyEditText.getText().toString().length() == getResources().getString(R.string.default_vigenere_key).length())
-            keyEditText.setText("");
-    }
 
-    //public boolean onKeyEditTextTouch(View v, MotionEvent e) // could be used later to let default text disappear
 
-    private void onMsgEditTextClick(View v){
-
-    }
-    // ...
 }
 
 

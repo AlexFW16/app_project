@@ -45,31 +45,46 @@ public class LoginActivity extends AppCompatActivity {
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){
-            updateUI(currentUser); // updates UI as if user had just signed in
-        }
+        login(mAuth.getCurrentUser());
     }
 
     private void onLoginButtonClick(View v) {
         String email = emailEditText.getText().toString();
         String password = passwordEditText.getText().toString();
+        login(email, password);
+
+    }
+
+    private void onRegisterButtonClick(View v) {
+        Intent intent = new Intent(getApplicationContext(), RegistrationActivity.class);
+        startActivity(intent);
+        finish();
+    }
 
 
+    // Login is always called before a user enters the main app -> ensure the right user data is there
+    private void login(FirebaseUser user) {
+        updateUI(user);
+        if (user != null) {
+            updateUI(user); // updates UI as if user had just signed in
+        }
+
+        //TODO restore user data to prefs
+    }
+
+    private void login(String email, String password) {
         if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
             //debug ??
             Log.w("Register", "Email or password is empty");
-            //TODO add working Toast message
             Toast.makeText(LoginActivity.this, "Email or password cannot be emtpy", Toast.LENGTH_LONG);
-            return;
         }
 
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this::onCompleteFirebaseLogin);
 
-
-
+        //TODO restore user data to prefs
     }
-    private void onCompleteFirebaseLogin(@NonNull Task<AuthResult> task){
+
+    private void onCompleteFirebaseLogin(@NonNull Task<AuthResult> task) {
         if (task.isSuccessful()) {
             // Sign in success, update UI with the signed-in user's information
             Log.d("FirebaseAuth", "signInWithEmail:success");
@@ -78,21 +93,18 @@ public class LoginActivity extends AppCompatActivity {
         } else {
             // If sign in fails, display a message to the user.
             Log.w("FirebaseAuth", "signInWithEmail:failure", task.getException());
-            Toast.makeText(LoginActivity.this, "Authentication failed.",
-                    Toast.LENGTH_SHORT).show();
-           updateUI(null);
+            Toast.makeText(getApplicationContext(), "Authentication failed.", Toast.LENGTH_SHORT).show();
+            updateUI(null);
         }
 
     }
 
-    private void updateUI(FirebaseUser user){
-        if(user == null){
+    private void updateUI(FirebaseUser user) {
+        if (user == null) {
             // Login failed
             //TODO
-        }
-        else { // Login successful
-            Toast.makeText(LoginActivity.this, "You are logged in!",
-                    Toast.LENGTH_SHORT).show();
+        } else { // Login successful
+            Toast.makeText(LoginActivity.this, "You are logged in!", Toast.LENGTH_SHORT).show();
 
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
@@ -100,12 +112,7 @@ public class LoginActivity extends AppCompatActivity {
 
         }
 
+
     }
 
-
-    private void onRegisterButtonClick(View v) {
-        Intent intent = new Intent(getApplicationContext(), RegistrationActivity.class);
-        startActivity(intent);
-        finish();
-    }
 }

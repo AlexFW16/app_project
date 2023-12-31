@@ -8,7 +8,9 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -16,6 +18,9 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.appcompat.widget.Toolbar;
+
+import java.util.HashMap;
+import java.util.LinkedList;
 
 import uk.bradford.app_project.fragments.AboutFragment;
 import uk.bradford.app_project.fragments.SettingsFragment;
@@ -69,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
@@ -115,11 +121,13 @@ public class MainActivity extends AppCompatActivity {
 
 
     // Firebase
-    private boolean logout(FirebaseUser user) {
+    public boolean logout(FirebaseUser user) {
         if (user == null) {
             Log.e("Logout", "User is null");
             return false;
         } else {
+            // TODO save all inputs to firebase as "last session"
+            // TODO clear prefs from file
             mAuth.signOut();
             returnToLogin();
             return true;
@@ -131,5 +139,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
+
 }
 

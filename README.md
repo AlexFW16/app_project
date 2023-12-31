@@ -20,6 +20,8 @@ android apps, service, sensor, or sensor API.
   -> Just use the same id for the same buttons etc.
 - Add switch button (output text and msg)
 - Descriptions/how to use for all ciphers
+- (Add key/password generator)
+- Maybe issues when restoring data with isBinary in XOR?
 
 
 ### How is MVC implemented?

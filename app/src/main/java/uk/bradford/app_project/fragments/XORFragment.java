@@ -6,23 +6,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.Toast;
 
-import androidx.fragment.app.Fragment;
 
 import uk.bradford.app_project.Cipher;
 import uk.bradford.app_project.Crypto;
 import uk.bradford.app_project.R;
 import uk.bradford.app_project.Util;
 
-public class XORFragment extends Fragment {
-    private Button encryptBtn, decryptBtn, toggleBinaryButton;
-
-    private EditText keyEditText, msgEditText;
-    private TextView outputTextView;
+public class XORFragment extends CipherFragment {
 
     private boolean isBinaryOut;
+    private Button toggleBinaryButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -43,21 +38,24 @@ public class XORFragment extends Fragment {
         encryptBtn.setOnClickListener(this::onEncryptButtonClick);
         decryptBtn.setOnClickListener(this::onDecryptButtonClick);
         toggleBinaryButton.setOnClickListener(this::onToggleBinaryButtonClick);
-        keyEditText.setOnClickListener(this::onKeyEditTextClick);
+        //keyEditText.setOnClickListener(this::onKeyEditTextClick);
         //keyEditText.setOnTouchListener(this::onKeyEditTextTouch);
-        msgEditText.setOnClickListener(this::onMsgEditTextClick);
+        //msgEditText.setOnClickListener(this::onMsgEditTextClick);
 
         return rootView;
     }
 
+    @Override
+    protected Cipher getCipher(){
+       return Cipher.XOR;
+    }
 
-    //TODO implement
     private void onEncryptButtonClick(View v) {
         try {
             String encryptedText = Crypto.encrypt(Cipher.XOR, msgEditText.getText().toString(), keyEditText.getText().toString());
             outputTextView.setText(encryptedText);
         } catch (IllegalArgumentException e) {
-            // TODO Toast
+            Toast.makeText(getActivity().getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
             Log.e("IllegalArgumentException", e.getMessage());
         }
     }
@@ -84,16 +82,12 @@ public class XORFragment extends Fragment {
 
     }
 
-    private void onKeyEditTextClick(View v) {
 
-        //if (keyEditText.getText().toString().length() == getResources().getString(R.string.default_vigenere_key).length())
-        //keyEditText.setText("");
-    }
+    //private void onKeyEditTextClick(View v) {
 
     //public boolean onKeyEditTextTouch(View v, MotionEvent e) { // could be used later to let default text disappear
 
-    private void onMsgEditTextClick(View v) {
+    //private void onMsgEditTextClick(View v) {
 
-    }
 
 }

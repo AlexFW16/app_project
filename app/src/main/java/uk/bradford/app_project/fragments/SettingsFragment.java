@@ -4,7 +4,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
@@ -16,9 +18,10 @@ public class SettingsFragment extends Fragment {
 
     private FirebaseUser user;
 
-    private EditText email, password;
-    public SettingsFragment(FirebaseUser user) {
+    private TextView emailTextView, passwordTextView;
+    private Button editEmail, editPassword;
 
+    public SettingsFragment(FirebaseUser user) {
         this.user = user;
     }
 
@@ -28,12 +31,11 @@ public class SettingsFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.settings, container, false);
 
 
-        email = rootView.findViewById(R.id.settings_user_email);
-        password = rootView.findViewById(R.id.settings_user_password);
+        emailTextView = rootView.findViewById(R.id.settings_user_email);
+        passwordTextView = rootView.findViewById(R.id.settings_user_password);
 
-        email.setText(user.getEmail().toString());
-
-
+        emailTextView.setText(user.getEmail().toString());
+        passwordTextView.setText("nope ;)");
 
         return rootView;
     }

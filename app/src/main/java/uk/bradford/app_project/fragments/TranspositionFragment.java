@@ -17,11 +17,7 @@ import uk.bradford.app_project.Cipher;
 import uk.bradford.app_project.Crypto;
 import uk.bradford.app_project.R;
 
-public class TranspositionFragment extends Fragment {
-    private Button encryptBtn, decryptBtn;
-    private EditText keyEditText, msgEditText;
-
-    private TextView outputTextView;
+public class TranspositionFragment extends CipherFragment {
 
 
     @Override
@@ -41,11 +37,12 @@ public class TranspositionFragment extends Fragment {
         decryptBtn.setOnClickListener(this::onDecryptButtonClick);
         //keyEditText.setOnClickListener(this::onKeyEditTextClick);
         //keyEditText.setOnTouchListener(this::onKeyEditTextTouch);
-        msgEditText.setOnClickListener(this::onMsgEditTextClick);
 
         return rootView;
     }
 
+    @Override
+    protected Cipher getCipher() { return Cipher.TRANSPOSITION;}
 
     //TODO implement
     private void onEncryptButtonClick(View v) {
@@ -69,12 +66,5 @@ public class TranspositionFragment extends Fragment {
         }
     }
 
-    //private void onKeyEditTextClick(View v){}
-
-    //public boolean onKeyEditTextTouch(View v, MotionEvent e){} // could be used later to let default text disappear
-
-    private void onMsgEditTextClick(View v) {
-
-    }
 
 }
