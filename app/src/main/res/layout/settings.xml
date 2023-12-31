@@ -44,6 +44,23 @@
             android:layout_height="wrap_content"
             android:text="@string/settings_change_password" />
 
+
+
     </LinearLayout>
+    <!-- Dark Mode Switch -->
+
+    <Switch
+        android:id="@+id/dark_mode_switch"
+        android:layout_width="378dp"
+        android:layout_height="71dp"
+        android:layout_gravity="end"
+        android:text="Dark Mode" />
+    <!-- Notification Switch -->
+    <Switch
+        android:id="@+id/noti_switch"
+        android:layout_width="378dp"
+        android:layout_height="71dp"
+        android:layout_gravity="end"
+        android:text="Notifications" />
 
 </LinearLayout>
