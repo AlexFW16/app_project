@@ -13,6 +13,9 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import uk.bradford.app_project.Cipher;
 import uk.bradford.app_project.Crypto;
 import uk.bradford.app_project.R;
@@ -43,7 +46,9 @@ public class SubstitutionFragment extends CipherFragment {
     }
 
     @Override
-    protected Cipher getCipher() { return Cipher.SUBSTITUTION;}
+    protected Cipher getCipher() {
+        return Cipher.SUBSTITUTION;
+    }
 
     //TODO implement
     private void onEncryptButtonClick(View v) {

@@ -11,11 +11,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import uk.bradford.app_project.model.User;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -24,12 +30,15 @@ public class LoginActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
 
+    private FirebaseDatabase database;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
         mAuth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance();
 
         emailEditText = findViewById(R.id.login_email_input);
         passwordEditText = findViewById(R.id.login_password_input);
@@ -70,6 +79,8 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         //TODO restore user data to prefs
+
+        //restoreUserData(mAuth.getCurrentUser());
     }
 
     private void login(String email, String password) {
@@ -82,6 +93,7 @@ public class LoginActivity extends AppCompatActivity {
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this::onCompleteFirebaseLogin);
 
         //TODO restore user data to prefs
+        //restoreUserDataToPrefs(mAuth.getCurrentUser());
     }
 
     private void onCompleteFirebaseLogin(@NonNull Task<AuthResult> task) {
@@ -111,7 +123,6 @@ public class LoginActivity extends AppCompatActivity {
             finish();
 
         }
-
 
     }
 
