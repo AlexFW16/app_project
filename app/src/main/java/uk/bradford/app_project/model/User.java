@@ -13,13 +13,11 @@ public class User {
 
     private LinkedList<CipherSnapshot> savedSnapshots;
 
-    public User(){
 
+    // Empty Constructor necessary to restore data object from prefs file
+    public User() {
     }
-    public User(String id, String email) {
-        this.id = id;
-        this.email = email;
-    }
+
 
     public void setId(String id) {
         this.id = id;

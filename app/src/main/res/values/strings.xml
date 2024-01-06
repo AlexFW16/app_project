@@ -29,6 +29,18 @@
     <string name="registration_register_button">Register</string>
     <string name="registration_back_button">Back to Login</string>
 
+    <!-- Descriptions -->
+    <string name="description_vigenere"> <b>Description</b> \n The Vigenère cipher is a method of encrypting alphabetic text by using a simple form of polyalphabetic substitution. Instead of using a single fixed substitution for each letter, like in the Caesar cipher, the Vigenère cipher uses a keyword to determine multiple substitutions for each letter. The keyword is repeated to match the length of the message, and each letter in the message is shifted according to its corresponding letter in the keyword.</string>
+    <string name="description_xor"> <b>Description</b> \n The XOR (exclusive OR) cipher is a simple and bitwise encryption technique. It operates by applying the XOR operation between each character of the plaintext and a corresponding character in a secret key. The ciphertext is produced by this bitwise operation, providing a basic form of encryption.</string>
+    <string name="description_transposition"> <b>Description</b> \nA transposition cipher involves rearranging the order of characters in the plaintext to create the ciphertext. Unlike substitution ciphers, transposition ciphers do not replace the characters; instead, they change the position of the characters. This method adds a layer of complexity to the encryption process, and popular examples include the Rail Fence and Columnar transposition ciphers.</string>
+    <string name="description_substitution"> <b>Description</b> \n A substitution cipher is a method of encryption where each letter in the plaintext is replaced with another letter or symbol according to a predetermined system. The most straightforward example is the Caesar cipher, which shifts each letter by a fixed amount.</string>
+    <string name="description_button_usage">Usage</string>
+    <string name="description_button_description">Description</string>
+
+    <string name="usage_vigenere">How to use Vigenere Cipher</string>
+    <string name="usage_xor">How to use XOR Cipher</string>
+    <string name="usage_transposition">How to use Transposition Cipher</string>
+    <string name="usage_substitution">How to use Substitution Cipher</string>
 
     <!-- settings -->
     <string name="settings_title"> Settings </string>
@@ -37,7 +49,7 @@
 
     <!-- about -->
     <string name="about_title"> About </string>
-    <string name="about_bio">GEH DOCH ESL SPIELEN DU BASTARD</string>
+    <string name="about_description"> <b>What this apps for</b> \nIn cryptography, encryption is the process of encoding information. This process converts the original representation of the information, known as plaintext, into an alternative form known as ciphertext. Ideally, only authorized parties can decipher a ciphertext back to plaintext and access the original information. </string>
 
     <!-- Ciphers -->
     <!-- Vigenere -->

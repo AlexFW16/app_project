@@ -28,6 +28,7 @@ import androidx.appcompat.widget.Toolbar;
 import java.util.ArrayList;
 
 import uk.bradford.app_project.fragments.AboutFragment;
+import uk.bradford.app_project.fragments.DescriptionFragment;
 import uk.bradford.app_project.fragments.SettingsFragment;
 import uk.bradford.app_project.fragments.SubstitutionFragment;
 import uk.bradford.app_project.fragments.TranspositionFragment;
@@ -52,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Starting screen fragment
         Fragment aboutFragment = new AboutFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, aboutFragment).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_1, aboutFragment).commit();
 
 
         drawerLayout = findViewById(R.id.drawer_layout);
@@ -94,23 +95,29 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    //TODO chanage to different Fragment with buttons for description/usage/...
     private boolean onNavigationViewItemSelected(MenuItem item) {
 
         int id = item.getItemId();
         Fragment fragment;
+        Fragment descriptionFragment = new DescriptionFragment();
 
         if (id == R.id.nav_item1) {
             fragment = new VigenereFragment();
+            descriptionFragment = new DescriptionFragment(Cipher.VIGENERE);
 
         } else if (id == R.id.nav_item2) {
             fragment = new XORFragment();
+            descriptionFragment = new DescriptionFragment(Cipher.XOR);
 
         } else if (id == R.id.nav_item3) {
 
             fragment = new SubstitutionFragment();
+            descriptionFragment = new DescriptionFragment(Cipher.SUBSTITUTION);
         } else if (id == R.id.nav_item4) {
 
             fragment = new TranspositionFragment();
+            descriptionFragment = new DescriptionFragment(Cipher.TRANSPOSITION);
         } else if (id == R.id.nav_item5) {
             fragment = new SettingsFragment(user);
 
@@ -124,7 +131,8 @@ public class MainActivity extends AppCompatActivity {
             fragment = null;
         }
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_1, fragment).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_2, descriptionFragment).commit();
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
@@ -233,7 +241,6 @@ public class MainActivity extends AppCompatActivity {
                         editor.apply();
                         i++;
                     }
-
 
 
                 }

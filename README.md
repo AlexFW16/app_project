@@ -18,7 +18,9 @@ android apps, service, sensor, or sensor API.
 - [ ] Add another fragment (bottom) that is used to display more detailed information (xor: binary code, ...)
 - [ ]Weird that the fragments change their id's, probably bc they are the same and get overriden on change or smth? 
   -> Just use the same id for the same buttons etc.
-- [ ] We could also add the option to save inputs and have a history -> Lot of work, for now only the last used snapshot
+- [ ] Error messages for wrong input in encryption
+- [ ] Change binary mode to switch instead of button
+- [ ] (We could also add the option to save inputs and have a history -> Lot of work, for now only the last used snapshot)
 - [ ] Add switch button (output text and msg)
 - [ ] Descriptions/how to use for all ciphers
 - [ ]Maybe issues when restoring data with isBinary in XOR?

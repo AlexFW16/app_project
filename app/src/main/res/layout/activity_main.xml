@@ -47,9 +47,16 @@
             </com.google.android.material.appbar.AppBarLayout>
 
             <FrameLayout
-                android:id="@+id/fragment_container"
+                android:id="@+id/fragment_container_1"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="425dp">
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/fragment_container_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
 
             <!-- the TextView text & color will remain static until then...  -->

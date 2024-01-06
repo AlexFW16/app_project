@@ -10,7 +10,11 @@ public class CipherSnapshot {
 
     private ArrayList<ArrayList<String>> ciphersPairs;
 
-    public CipherSnapshot(){};
+    // Empty Constructor necessary to restore data object from prefs file
+    public CipherSnapshot() {
+    }
+
+
     public CipherSnapshot(ArrayList<ArrayList<String>> keyAndMsgArray) {
         this.ciphersPairs = keyAndMsgArray;
         this.id = UUID.randomUUID().toString();
