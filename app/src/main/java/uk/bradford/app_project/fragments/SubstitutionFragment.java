@@ -57,7 +57,8 @@ public class SubstitutionFragment extends CipherFragment {
             String encryptedText = Crypto.encrypt(Cipher.SUBSTITUTION, msgEditText.getText().toString(), keyEditText.getText().toString());
             outputTextView.setText(encryptedText);
         } catch (IllegalArgumentException e) {
-            Toast.makeText(getContext(), "Badly formatted input, see help", Toast.LENGTH_LONG);
+            printErrorMessage(R.string.input_error_substitution);
+            //Toast.makeText(getContext(), "Badly formatted input, see help", Toast.LENGTH_LONG);
             Log.e("IllegalArgumentException", e.getMessage());
         }
 
@@ -65,14 +66,12 @@ public class SubstitutionFragment extends CipherFragment {
 
     private void onDecryptButtonClick(View v) {
         try {
-            Log.w("Sub:", msgEditText.getText().toString());
-            Log.w("Sub:", keyEditText.getText().toString());
             String decryptedText = Crypto.decrypt(Cipher.SUBSTITUTION, msgEditText.getText().toString(), keyEditText.getText().toString());
-            Log.w("Out", decryptedText);
-
             outputTextView.setText(decryptedText);
         } catch (IllegalArgumentException e) {
-            Toast.makeText(getContext(), "Badly formatted input, see help", Toast.LENGTH_LONG);
+
+            printErrorMessage(R.string.input_error_substitution);
+            //Toast.makeText(getContext(), "Badly formatted input, see help", Toast.LENGTH_LONG);
             Log.e("IllegalArgumentException", e.getMessage());
 
         }

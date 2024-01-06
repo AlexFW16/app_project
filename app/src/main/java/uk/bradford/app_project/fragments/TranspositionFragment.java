@@ -42,7 +42,9 @@ public class TranspositionFragment extends CipherFragment {
     }
 
     @Override
-    protected Cipher getCipher() { return Cipher.TRANSPOSITION;}
+    protected Cipher getCipher() {
+        return Cipher.TRANSPOSITION;
+    }
 
     //TODO implement
     private void onEncryptButtonClick(View v) {
@@ -50,7 +52,8 @@ public class TranspositionFragment extends CipherFragment {
             String encryptedText = Crypto.encrypt(Cipher.TRANSPOSITION, msgEditText.getText().toString(), keyEditText.getText().toString());
             outputTextView.setText(encryptedText);
         } catch (IllegalArgumentException e) {
-            Toast.makeText(getContext(), "Badly formatted input, see help", Toast.LENGTH_LONG);
+            printErrorMessage(R.string.input_error_transposition);
+            //Toast.makeText(getContext(), "Badly formatted input, see help", Toast.LENGTH_LONG);
             Log.e("IllegalArgumentException", e.getMessage());
         }
     }
@@ -61,7 +64,8 @@ public class TranspositionFragment extends CipherFragment {
             String decryptedText = Crypto.encrypt(Cipher.TRANSPOSITION, msgEditText.getText().toString(), keyEditText.getText().toString());
             outputTextView.setText(decryptedText);
         } catch (IllegalArgumentException e) {
-            Toast.makeText(getContext(), "Badly formatted input, see help", Toast.LENGTH_LONG);
+            printErrorMessage(R.string.input_error_transposition);
+            //Toast.makeText(getContext(), "Badly formatted input, see help", Toast.LENGTH_LONG);
             Log.e("IllegalArgumentException", e.getMessage());
         }
     }

@@ -2,6 +2,10 @@ package uk.bradford.app_project.fragments;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -9,6 +13,7 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import uk.bradford.app_project.Cipher;
+import uk.bradford.app_project.R;
 
 public abstract class CipherFragment extends Fragment {
     protected Button encryptBtn, decryptBtn, toggleBinaryButton;
@@ -42,6 +47,17 @@ public abstract class CipherFragment extends Fragment {
         keyEditText.setText(key);
         msgEditText.setText(msg);
         outputTextView.setText(out);
+    }
+
+    // Sets the error msg as red text on the output field
+    void printErrorMessage(int errorMsgResource) {
+        // Creates a string that is inherently red, so the text colour of the textView doesn't need to be changed
+        String errorMsg = getResources().getString(errorMsgResource);
+        SpannableString spannableError = new SpannableString(errorMsg);
+        spannableError.setSpan(new ForegroundColorSpan(Color.RED), 0, errorMsg.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        outputTextView.setText(spannableError);
+
     }
 
 }

@@ -38,9 +38,6 @@ public class XORFragment extends CipherFragment {
         encryptBtn.setOnClickListener(this::onEncryptButtonClick);
         decryptBtn.setOnClickListener(this::onDecryptButtonClick);
         toggleBinaryButton.setOnClickListener(this::onToggleBinaryButtonClick);
-        //keyEditText.setOnClickListener(this::onKeyEditTextClick);
-        //keyEditText.setOnTouchListener(this::onKeyEditTextTouch);
-        //msgEditText.setOnClickListener(this::onMsgEditTextClick);
 
         return rootView;
     }
@@ -55,7 +52,9 @@ public class XORFragment extends CipherFragment {
             String encryptedText = Crypto.encrypt(Cipher.XOR, msgEditText.getText().toString(), keyEditText.getText().toString());
             outputTextView.setText(encryptedText);
         } catch (IllegalArgumentException e) {
-            Toast.makeText(getActivity().getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+
+            printErrorMessage(R.string.input_error_xor);
+           // Toast.makeText(getActivity().getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
             Log.e("IllegalArgumentException", e.getMessage());
         }
     }
@@ -66,6 +65,7 @@ public class XORFragment extends CipherFragment {
             outputTextView.setText(decryptedText);
         } catch (IllegalArgumentException e) {
             // TODO Toast
+            printErrorMessage(R.string.input_error_xor);
             Log.e("IllegalArgumentException", e.getMessage());
         }
 

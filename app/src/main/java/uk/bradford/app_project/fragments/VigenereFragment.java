@@ -1,6 +1,10 @@
 package uk.bradford.app_project.fragments;
 
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -48,14 +52,16 @@ public class VigenereFragment extends CipherFragment {
         return Cipher.VIGENERE;
     }
 
-    //TODO implement
     private void onEncryptButtonClick(View v) {
 
         try {
             String encryptedText = Crypto.encrypt(Cipher.VIGENERE, msgEditText.getText().toString().toUpperCase(), keyEditText.getText().toString().toUpperCase());
             outputTextView.setText(encryptedText);
         } catch (IllegalArgumentException e) {
-            Toast.makeText(getContext(), "Message or Key contains letters different to \"a, b, c, ...\",", Toast.LENGTH_LONG);
+
+            printErrorMessage(R.string.input_error_vigenere);
+
+            Toast.makeText(this.getActivity().getApplicationContext(), "Message or Key contains letters different \nto \"a, b, c, ...\"", Toast.LENGTH_LONG);
             Log.e("IllegalArgumentException", e.getMessage());
         }
 
@@ -68,6 +74,7 @@ public class VigenereFragment extends CipherFragment {
             String encryptedText = Crypto.decrypt(Cipher.VIGENERE, msgEditText.getText().toString().toUpperCase(), keyEditText.getText().toString().toUpperCase());
             outputTextView.setText(encryptedText);
         } catch (IllegalArgumentException e) {
+            printErrorMessage(R.string.input_error_vigenere);
             Toast.makeText(getContext(), "Message or Key contains letters different to \"a, b, c, ...\",", Toast.LENGTH_LONG);
             Log.e("IllegalArgumentException", e.getMessage());
         }

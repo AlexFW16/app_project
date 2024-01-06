@@ -85,4 +85,10 @@
     <string name="cipher4_encryption_btn">Encrypt</string>
     <string name="cipher4_decryption_btn">Decrypt</string>
     <string name="cipher4_output">Cipher or message</string>
+
+    <!-- Error messages -->
+    <string name="input_error_vigenere">Message or Key contains letters different to \"a, b, c, ...\"</string>
+    <string name="input_error_xor">Badly formatted input, refer to usage and description</string>
+    <string name="input_error_substitution">Badly formatted input, refer to usage and description</string>
+    <string name="input_error_transposition">Badly formatted input, refer to usage and description</string>
 </resources>
