@@ -8,7 +8,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -27,8 +26,6 @@ import androidx.fragment.app.Fragment;
 import androidx.appcompat.widget.Toolbar;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
 
 import uk.bradford.app_project.fragments.AboutFragment;
 import uk.bradford.app_project.fragments.SettingsFragment;
@@ -51,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_standard_cipher);
+        setContentView(R.layout.activity_main);
 
         // Starting screen fragment
         Fragment aboutFragment = new AboutFragment();

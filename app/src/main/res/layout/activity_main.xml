@@ -1,117 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    >
 
-    <LinearLayout
+
+    <!-- Main content inside the DrawerLayout -->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/button"
-        app:layout_constraintTop_toBottomOf="@+id/cipher_title"
-        tools:layout_editor_absoluteX="0dp">
+        android:layout_height="match_parent">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <ImageButton
-                android:id="@+id/cipherButton6"
-                android:layout_width="230dp"
-                android:layout_height="150dp"
-                android:layout_weight="1"
-                android:contentDescription="@string/cipher4_button"
-                android:background="@drawable/rounded_button_shape"
-                android:layout_margin="10dp"
-                android:src="@android:drawable/btn_star" />
+            <!-- existing AppBarLayout, Toolbar, and other views -->
+
+            <com.google.android.material.appbar.AppBarLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.appbar.MaterialToolbar
+                    android:id="@+id/topAppBar"
+                    style="@style/Widget.MaterialComponents.Toolbar.Primary"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize">
+
+                    <TextView
+                        android:id="@+id/toolbarTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="@string/app_title"
+                        android:textAppearance="?attr/textAppearanceHeadline6"
+                        android:textSize="34sp" />
+                </com.google.android.material.appbar.MaterialToolbar>
+            </com.google.android.material.appbar.AppBarLayout>
+
+            <FrameLayout
+                android:id="@+id/fragment_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
 
-            <ImageButton
-                android:id="@+id/cipherButton5"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:layout_weight="1"
-                android:background="@drawable/rounded_button_shape"
-                android:layout_margin="10dp"
-                android:contentDescription="@string/cipher3_button"
-                android:src="@android:drawable/btn_star" />
+            <!-- the TextView text & color will remain static until then...  -->
+
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <ImageButton
-                android:id="@+id/cipherButton4"
-                android:layout_width="200dp"
-                android:layout_height="150dp"
-                android:layout_weight="1"
-                android:background="@drawable/rounded_button_shape"
-                android:layout_margin="10dp"
-                android:contentDescription="@string/cipher4_button"
-                android:src="@android:drawable/btn_star" />
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:menu="@menu/nav_drawer_menu" />
 
-            <ImageButton
-                android:id="@+id/cipherButton3"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:layout_weight="1"
-                android:background="@drawable/rounded_button_shape"
-                android:layout_margin="10dp"
-                android:contentDescription="@string/cipher3_button"
-                android:src="@android:drawable/btn_star" />
-        </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+    <!-- NavigationView for the drawer -->
+    <!-- Navigation drawer items -->
 
-            <ImageButton
-                android:id="@+id/cipherButton2"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:contentDescription="@string/cipher2_button"
-                android:background="@drawable/rounded_button_shape"
-                android:layout_margin="10dp"
-                android:src="@android:drawable/btn_star" />
 
-            <ImageButton
-                android:id="@+id/vigenereButton"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:contentDescription="@string/vigenere_button"
-                android:background="@drawable/rounded_button_shape"
-                android:layout_margin="10dp"
-                android:scaleType="fitCenter"
-                android:src="@drawable/vigenere" />
-        </LinearLayout>
-    </LinearLayout>
+</androidx.drawerlayout.widget.DrawerLayout>
 
-    <TextView
-        android:id="@+id/cipher_title"
-        android:layout_width="122dp"
-        android:layout_height="56dp"
-        android:layout_marginTop="8dp"
-        android:text="Ciphers"
-        android:textSize="34sp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="151dp"
-        android:layout_marginBottom="8dp"
-        android:text="Button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
