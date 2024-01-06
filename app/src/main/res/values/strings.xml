@@ -68,7 +68,7 @@
     <string name="cipher2_decryption_btn">Decrypt</string>
     <string name="cipher2_output">Cipher or message</string>
 
-    <string name="cipher2_toggle_binary"> Binary </string>
+    <string name="cipher2_toggle_binary">BIN</string>
 
     <!-- Substitution-->
     <string name="cipher3_title"> Substitution Cipher</string>
