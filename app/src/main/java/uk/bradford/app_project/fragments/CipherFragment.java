@@ -8,6 +8,7 @@ import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
@@ -20,6 +21,8 @@ public abstract class CipherFragment extends Fragment {
 
     protected EditText keyEditText, msgEditText;
     protected TextView outputTextView;
+
+    protected ImageView micView;
 
     protected abstract uk.bradford.app_project.Cipher getCipher();
 
