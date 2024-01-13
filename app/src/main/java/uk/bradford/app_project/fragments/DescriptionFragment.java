@@ -3,14 +3,11 @@ package uk.bradford.app_project.fragments;
 
 import static android.view.View.GONE;
 
-import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -56,70 +53,20 @@ public class DescriptionFragment extends Fragment {
             return rootView;
         }
 
-        switch (cipher) {
-            case VIGENERE:
-                textView.setText(R.string.description_vigenere);
-                break;
-            case XOR:
-                textView.setText(R.string.description_xor);
-                break;
-            case SUBSTITUTION:
-                textView.setText(R.string.description_substitution);
-                break;
-            case TRANSPOSITION:
-                textView.setText(R.string.description_transposition);
-                break;
-            default:
-                Log.e("Description View", "Error occurred while checking description for cipher");
-
-
-        }
+        textView.setText(cipher.getDESCRIPTION());
 
         return rootView;
     }
 
     public void onUsageButtonClick(View v) {
 
+        textView.setText(cipher.getUSAGE());
 
-        switch (cipher) {
-            case VIGENERE:
-                textView.setText(R.string.usage_vigenere);
-                break;
-            case XOR:
-                textView.setText(R.string.usage_xor);
-                break;
-            case SUBSTITUTION:
-                textView.setText(R.string.usage_substitution);
-                break;
-            case TRANSPOSITION:
-                textView.setText(R.string.usage_transposition);
-                break;
-            default:
-                textView.setText("");
-
-        }
 
     }
 
     public void onDescriptionButtonClick(View v) {
-        switch (cipher) {
-            case VIGENERE:
-                textView.setText(R.string.description_vigenere);
-                break;
-            case XOR:
-                textView.setText(R.string.description_xor);
-                break;
-            case SUBSTITUTION:
-                textView.setText(R.string.description_substitution);
-                break;
-            case TRANSPOSITION:
-                textView.setText(R.string.description_transposition);
-                break;
-            default:
-                textView.setText("");
-
-
-        }
+        textView.setText(cipher.getDESCRIPTION());
 
 
     }

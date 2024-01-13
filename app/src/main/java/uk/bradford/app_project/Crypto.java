@@ -25,13 +25,14 @@ public class Crypto {
     // Checks if the alphabet used in key/message works for this cipher
     // Matches cipher to alphabet
     // e.g. Vigenere does not allow for numbers
-    private static boolean checkAlphabet(Cipher cipher, String text) {
+    private static boolean checkAlphabet(Cipher.Type cipher, String text) {
         Set<Character> alphabet;
 
         switch (cipher) {
 
             case VIGENERE:
                 alphabet = Crypto.alphabet1;
+                text = text.toUpperCase(); // Vigenere is only considered in uppercase, but accepts mixed inputs
                 break;
             case XOR: // WIth XOR, everything is converted to its binary representation, hence no alphabet check needed
             case SUBSTITUTION:
@@ -48,7 +49,7 @@ public class Crypto {
         return true;
     }
 
-    public static String encrypt(Cipher cipher, String plaintext, String key) throws IllegalArgumentException {
+    public static String encrypt(Cipher.Type cipher, String plaintext, String key) throws IllegalArgumentException {
 
         if (!checkAlphabet(cipher, plaintext + key))
             throw new IllegalArgumentException("Contains letters that are not in the alphabet of this cipher");
@@ -59,7 +60,7 @@ public class Crypto {
         switch (cipher) {
 
             case VIGENERE:
-                return encryptVigenere(plaintext, key);
+                return encryptVigenere(plaintext.toUpperCase(), key.toUpperCase());
             case XOR:
                 return encryptXOR(plaintext, key);
             case SUBSTITUTION:
@@ -72,7 +73,7 @@ public class Crypto {
 
     }
 
-    public static String decrypt(Cipher cipher, String ciphertext, String key) {
+    public static String decrypt(Cipher.Type cipher, String ciphertext, String key) {
 
         if (!checkAlphabet(cipher, ciphertext + key))
             throw new IllegalArgumentException("Contains letters that are not in the alphabet of this cipher");

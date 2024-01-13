@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.menuicon);
 
-        // Restore user data??
+        // Restore user data
         restoreUserDataToPrefs(mAuth.getCurrentUser());
     }
 
@@ -82,7 +82,6 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
         if (user == null)  // goes back to the login activity if user is not logged in
             returnToLogin();
-
     }
 
 
@@ -95,7 +94,6 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    //TODO chanage to different Fragment with buttons for description/usage/...
     private boolean onNavigationViewItemSelected(MenuItem item) {
 
         int id = item.getItemId();
@@ -104,20 +102,26 @@ public class MainActivity extends AppCompatActivity {
 
         if (id == R.id.nav_item1) {
             fragment = new VigenereFragment();
-            descriptionFragment = new DescriptionFragment(Cipher.VIGENERE);
+            Cipher cipher = new Cipher(R.layout.vigenere, R.string.input_error_vigenere, R.string.usage_vigenere, R.string.description_vigenere, Cipher.Type.VIGENERE);
+            descriptionFragment = new DescriptionFragment(cipher);
 
         } else if (id == R.id.nav_item2) {
             fragment = new XORFragment();
-            descriptionFragment = new DescriptionFragment(Cipher.XOR);
+            Cipher cipher = new Cipher(R.layout.xor, R.string.input_error_xor, R.string.usage_xor, R.string.description_xor, Cipher.Type.XOR);
+            descriptionFragment = new DescriptionFragment(cipher);
 
         } else if (id == R.id.nav_item3) {
 
             fragment = new SubstitutionFragment();
-            descriptionFragment = new DescriptionFragment(Cipher.SUBSTITUTION);
+            Cipher cipher = new Cipher(R.layout.substitution, R.string.input_error_substitution, R.string.usage_substitution, R.string.description_substitution, Cipher.Type.SUBSTITUTION);
+            descriptionFragment = new DescriptionFragment(cipher);
+
         } else if (id == R.id.nav_item4) {
 
             fragment = new TranspositionFragment();
-            descriptionFragment = new DescriptionFragment(Cipher.TRANSPOSITION);
+            Cipher cipher = new Cipher(R.layout.transposition, R.string.input_error_transposition, R.string.usage_transposition, R.string.description_transposition, Cipher.Type.TRANSPOSITION);
+            descriptionFragment = new DescriptionFragment(cipher);
+
         } else if (id == R.id.nav_item5) {
             fragment = new SettingsFragment(user);
 
@@ -131,6 +135,7 @@ public class MainActivity extends AppCompatActivity {
             fragment = null;
         }
 
+        // Sets the fragments into the containers
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_1, fragment).commit();
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_2, descriptionFragment).commit();
         drawerLayout.closeDrawer(GravityCompat.START);
@@ -139,6 +144,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     // Firebase
+    // ----------------------------
     public boolean logout(FirebaseUser user) {
         if (user == null) {
             Log.e("Logout", "User is null");
@@ -186,7 +192,7 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<ArrayList<String>> ciphers = new ArrayList<>();
 
         int i = 0;
-        for (Cipher cipher : Cipher.values()) {
+        for (Cipher.Type cipher : Cipher.Type.values()) {
             ArrayList<String> snapshot = new ArrayList<>();
             snapshot.add(0, prefs.getString(cipher + "key", ""));
             snapshot.add(1, prefs.getString(cipher + "msg", ""));
@@ -202,7 +208,7 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences prefs = this.getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
 
-        for (Cipher cipher : Cipher.values()) {
+        for (Cipher.Type cipher : Cipher.Type.values()) {
             editor.putString(cipher + "key", "");
             editor.putString(cipher + "msg", "");
             editor.putString(cipher + "out", "");
@@ -220,7 +226,7 @@ public class MainActivity extends AppCompatActivity {
                 if (!task.isSuccessful()) {
                     Log.e("firebase", "Error getting data", task.getException());
                 } else {
-                    // Retrieval was succuessful
+                    // Retrieval was successful
                     Log.d("firebase", String.valueOf(task.getResult().getValue()));
                     User userDataObject = task.getResult().getValue(User.class);
 
@@ -233,7 +239,7 @@ public class MainActivity extends AppCompatActivity {
                         return;
 
                     int i = 0;
-                    for (Cipher cipher : Cipher.values()) {
+                    for (Cipher.Type cipher : Cipher.Type.values()) {
                         ArrayList<String> cipherValues = userDataObject.getLastSnapshot().getCiphersPairs().get(i);
                         editor.putString(cipher + "key", cipherValues.get(0));
                         editor.putString(cipher + "msg", cipherValues.get(1));

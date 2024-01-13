@@ -16,6 +16,7 @@ android apps, service, sensor, or sensor API.
 - [ ] Make input fields, etc. look nice
 - [ ] Make 2 colour schemes, one for decrypting and one for encrypting 
 - [ ] Add another fragment (bottom) that is used to display more detailed information (xor: binary code, ...)
+- [ ] SpeechRecognizer is not properly closed
 - [ ]Weird that the fragments change their id's, probably bc they are the same and get overriden on change or smth? 
   -> Just use the same id for the same buttons etc.
 - [ ] Error messages for wrong input in encryption
