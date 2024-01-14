@@ -33,6 +33,7 @@
             android:id="@+id/login_password_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="textPassword"
             android:hint="@string/login_password_hint" />
 
     </LinearLayout>
@@ -42,9 +43,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/login_login_button" />
+
     <Button
         android:id="@+id/login_register_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/login_register_button" />
+
 </LinearLayout>
+
