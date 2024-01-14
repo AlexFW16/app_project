@@ -103,7 +103,12 @@ public abstract class CipherFragment extends Fragment {
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString(getCipher().getType().toString() + "key", keyEditText.getText().toString());
         editor.putString(getCipher().getType().toString() + "msg", msgEditText.getText().toString());
-        editor.putString(getCipher().getType().toString() + "out", outputTextView.getText().toString());
+        // Previous error msg should not be saved
+        if (outputTextView.getText().toString().equals(getResources().getString(getCipher().getErrorMsg())))
+            editor.putString(getCipher().getType().toString() + "out", "");
+        else
+            editor.putString(getCipher().getType().toString() + "out", outputTextView.getText().toString());
+
         editor.apply();
     }
 
@@ -111,7 +116,6 @@ public abstract class CipherFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-        Log.e("Loading", "LOADING tsuff");
         // Loads the latest in/outputs into the current cipher
         SharedPreferences prefs = getActivity().getPreferences(Context.MODE_PRIVATE);
         String key = prefs.getString(getCipher().getType().toString() + "key", "");
@@ -125,8 +129,7 @@ public abstract class CipherFragment extends Fragment {
 
     @Override
     public void onDestroyView() {
-        if (speechRecognizer != null)
-            speechRecognizer.destroy();
+        if (speechRecognizer != null) speechRecognizer.destroy();
         super.onDestroyView();
 
     }
