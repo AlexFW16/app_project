@@ -81,10 +81,13 @@ public abstract class CipherFragment extends Fragment {
         speechRecognizer.setRecognitionListener(new SpeechRecognitionListener(speechRecognizer, msgEditText));
 
         // Set the listeners
+        MicButtonListener micButtonListener = new MicButtonListener(getActivity(), speechRecognizer, speechIntent);
+        EncryptionButtonListener encryptionButtonListener = new EncryptionButtonListener(this);
+        DecryptionButtonListener decryptionButtonListener = new DecryptionButtonListener(this);
 
-        micView.setOnTouchListener(new MicButtonListener(getActivity(), speechRecognizer, speechIntent)::onMicTouch);
-        encryptBtn.setOnClickListener(new EncryptionButtonListener(this));
-        decryptBtn.setOnClickListener(new DecryptionButtonListener(this));
+        micView.setOnTouchListener(micButtonListener::onMicTouch);
+        encryptBtn.setOnClickListener(encryptionButtonListener);
+        decryptBtn.setOnClickListener(decryptionButtonListener);
 
 
         return rootView;
@@ -117,10 +120,12 @@ public abstract class CipherFragment extends Fragment {
         msgEditText.setText(msg);
         outputTextView.setText(out);
     }
+
     @Override
     public void onDestroyView() {
+        if (speechRecognizer != null)
+            speechRecognizer.destroy();
         super.onDestroyView();
-        speechRecognizer.destroy();
 
     }
 
@@ -134,7 +139,6 @@ public abstract class CipherFragment extends Fragment {
         outputTextView.setText(spannableError);
 
     }
-
 
 
 }
