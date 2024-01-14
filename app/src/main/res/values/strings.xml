@@ -14,7 +14,7 @@
     <string name="app_title">0xCrypt</string>
     <string name="logout_title"> Logout</string>
 
-     <!-- Login -->
+    <!-- Login -->
     <string name="login_title">Login</string>
     <string name="login_email_hint">Email</string>
     <string name="login_password_hint">Password</string>
@@ -30,17 +30,17 @@
     <string name="registration_back_button">Back to Login</string>
 
     <!-- Descriptions -->
-    <string name="description_vigenere"> <b>Description</b> \n The Vigenère cipher is a method of encrypting alphabetic text by using a simple form of polyalphabetic substitution. Instead of using a single fixed substitution for each letter, like in the Caesar cipher, the Vigenère cipher uses a keyword to determine multiple substitutions for each letter. The keyword is repeated to match the length of the message, and each letter in the message is shifted according to its corresponding letter in the keyword.</string>
-    <string name="description_xor"> <b>Description</b> \n The XOR (exclusive OR) cipher is a simple and bitwise encryption technique. It operates by applying the XOR operation between each character of the plaintext and a corresponding character in a secret key. The ciphertext is produced by this bitwise operation, providing a basic form of encryption.</string>
-    <string name="description_transposition"> <b>Description</b> \nA transposition cipher involves rearranging the order of characters in the plaintext to create the ciphertext. Unlike substitution ciphers, transposition ciphers do not replace the characters; instead, they change the position of the characters. This method adds a layer of complexity to the encryption process, and popular examples include the Rail Fence and Columnar transposition ciphers.</string>
+    <string name="description_vigenere"> <b>Description</b> \n The Vigenère cipher is a method of encrypting alphabetic text by using a simple form of polyalphabetic substitution. Instead of using a single fixed substitution for each letter, like in the Caesar cipher, the Vigenère cipher uses a key to determine different substitutions for each letter. The key is repeated to match the length of the message, and each letter in the message is shifted according to its corresponding letter in the key.</string>
+    <string name="description_xor"> <b>Description</b> \n The XOR (exclusive OR) cipher is a simple and bitwise encryption technique. It operates by applying the XOR operation between each character of the plaintext and a corresponding character in a secret key. The ciphertext is produced by this bitwise operation.</string>
+    <string name="description_transposition"> <b>Description</b> \nA transposition cipher involves rearranging the order of characters in the plaintext to create the ciphertext. Unlike substitution ciphers, transposition ciphers do not replace the characters; instead, they change the position of the characters inside the string.</string>
     <string name="description_substitution"> <b>Description</b> \n A substitution cipher is a method of encryption where each letter in the plaintext is replaced with another letter or symbol according to a predetermined system. The most straightforward example is the Caesar cipher, which shifts each letter by a fixed amount.</string>
     <string name="description_button_usage">Usage</string>
     <string name="description_button_description">Description</string>
 
-    <string name="usage_vigenere">How to use Vigenere Cipher</string>
-    <string name="usage_xor">How to use XOR Cipher</string>
-    <string name="usage_transposition">How to use Transposition Cipher</string>
-    <string name="usage_substitution">How to use Substitution Cipher</string>
+    <string name="usage_vigenere"> <b>Usage</b> \n Enter your desired key and message as letters. All letters will be converted to uppercase, and no whitespace is allowed.</string>
+    <string name="usage_xor"> <b>Usage</b> \n Enter a message and key of your choice. Both will be converted to binary and XORed bit by bit. Toggle the binary switch to view the binary representation, as the ciphertext may not consist of readable symbols.</string>
+    <string name="usage_transposition"> <b>Usage</b> \n Enter a message of your choice. Provide the key as a permutation of positions, separated by whitespace. For example, \"(1 2 3)(10 23)\" will swap places 10 and 23, and shift the first symbol to the second position, the second to the third, and the third to the first position.</string>
+    <string name="usage_substitution"> <b>Usage</b> \n Enter a message of your choice. Provide the key as permutation of symbols without seperating them, as whitespaces are considered symbols. For example, \"(abc)(9@)\" will replace a\'s with b\'s, b\'s with c\'s, and c\'s with a\'s. 9 and @ will be swapped.</string>
 
     <!-- settings -->
     <string name="settings_title"> Settings </string>
