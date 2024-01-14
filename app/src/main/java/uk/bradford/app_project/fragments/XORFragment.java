@@ -1,33 +1,17 @@
 package uk.bradford.app_project.fragments;
 
-import android.Manifest;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
-import android.speech.RecognizerIntent;
-import android.speech.SpeechRecognizer;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
-import android.widget.ImageView;
 import android.widget.Switch;
-import android.widget.Toast;
 
-
-import androidx.annotation.NonNull;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
-import java.util.Locale;
 
 import uk.bradford.app_project.Cipher;
 import uk.bradford.app_project.Crypto;
 import uk.bradford.app_project.R;
-import uk.bradford.app_project.listener.SpeechRecognitionListener;
 import uk.bradford.app_project.Util;
 
 public class XORFragment extends CipherFragment {
@@ -56,7 +40,7 @@ public class XORFragment extends CipherFragment {
     private void onEncryptButtonClick(View v) {
         try {
 
-            String encryptedText = Crypto.encrypt(getCipher().getTYPE(), msgEditText.getText().toString(), keyEditText.getText().toString());
+            String encryptedText = Crypto.encrypt(getCipher().getType(), msgEditText.getText().toString(), keyEditText.getText().toString());
             if (toggleBinarySwitch.isChecked())
                 encryptedText = Util.fromStringToBinaryString(encryptedText);
 
@@ -71,7 +55,7 @@ public class XORFragment extends CipherFragment {
 
     private void onDecryptButtonClick(View v) {
         try {
-            String decryptedText = Crypto.decrypt(getCipher().getTYPE(), msgEditText.getText().toString(), keyEditText.getText().toString());
+            String decryptedText = Crypto.decrypt(getCipher().getType(), msgEditText.getText().toString(), keyEditText.getText().toString());
 
             if (toggleBinarySwitch.isChecked())
                 decryptedText = Util.fromStringToBinaryString(decryptedText);

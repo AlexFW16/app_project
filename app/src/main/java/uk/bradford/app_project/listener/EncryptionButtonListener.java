@@ -18,7 +18,7 @@ public class EncryptionButtonListener implements View.OnClickListener {
     public void onClick(View v) {
 
         try {
-            String encryptedText = Crypto.encrypt(fragment.getCipher().getTYPE(), fragment.getMsgEditText().getText().toString(), fragment.getKeyEditText().getText().toString());
+            String encryptedText = Crypto.encrypt(fragment.getCipher().getType(), fragment.getMsgEditText().getText().toString(), fragment.getKeyEditText().getText().toString());
             fragment.getOutputTextView().setText(encryptedText);
         } catch (IllegalArgumentException e) {
 

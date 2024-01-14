@@ -53,20 +53,20 @@ public class DescriptionFragment extends Fragment {
             return rootView;
         }
 
-        textView.setText(cipher.getDESCRIPTION());
+        textView.setText(cipher.getDescription());
 
         return rootView;
     }
 
     public void onUsageButtonClick(View v) {
 
-        textView.setText(cipher.getUSAGE());
+        textView.setText(cipher.getUsage());
 
 
     }
 
     public void onDescriptionButtonClick(View v) {
-        textView.setText(cipher.getDESCRIPTION());
+        textView.setText(cipher.getDescription());
 
 
     }

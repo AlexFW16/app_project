@@ -17,7 +17,7 @@ public class DecryptionButtonListener implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         try {
-            String decryptedText = Crypto.decrypt(fragment.getCipher().getTYPE(), fragment.getMsgEditText().getText().toString(), fragment.getKeyEditText().getText().toString());
+            String decryptedText = Crypto.decrypt(fragment.getCipher().getType(), fragment.getMsgEditText().getText().toString(), fragment.getKeyEditText().getText().toString());
             fragment.getOutputTextView().setText(decryptedText);
         } catch (IllegalArgumentException e) {
             // TODO Toast

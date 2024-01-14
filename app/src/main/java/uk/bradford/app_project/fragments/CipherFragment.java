@@ -60,7 +60,7 @@ public abstract class CipherFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(getCipher().getLAYOUT(), container, false);
+        View rootView = inflater.inflate(getCipher().getLayout(), container, false);
 
 
         encryptBtn = rootView.findViewById(R.id.encrypt);
@@ -98,11 +98,12 @@ public abstract class CipherFragment extends Fragment {
     public void onPause() {
         super.onPause();
         // Saves the current in/outputs in the cipher fragment into the shared prefs
+
         SharedPreferences prefs = getActivity().getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
-        editor.putString(getCipher().toString() + "key", keyEditText.getText().toString());
-        editor.putString(getCipher().toString() + "msg", msgEditText.getText().toString());
-        editor.putString(getCipher().toString() + "out", outputTextView.getText().toString());
+        editor.putString(getCipher().getType().toString() + "key", keyEditText.getText().toString());
+        editor.putString(getCipher().getType().toString() + "msg", msgEditText.getText().toString());
+        editor.putString(getCipher().getType().toString() + "out", outputTextView.getText().toString());
         editor.apply();
     }
 
@@ -110,11 +111,12 @@ public abstract class CipherFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
+        Log.e("Loading", "LOADING tsuff");
         // Loads the latest in/outputs into the current cipher
         SharedPreferences prefs = getActivity().getPreferences(Context.MODE_PRIVATE);
-        String key = prefs.getString(getCipher().toString() + "key", "");
-        String msg = prefs.getString(getCipher().toString() + "msg", "");
-        String out = prefs.getString(getCipher().toString() + "out", "");
+        String key = prefs.getString(getCipher().getType().toString() + "key", "");
+        String msg = prefs.getString(getCipher().getType().toString() + "msg", "");
+        String out = prefs.getString(getCipher().getType().toString() + "out", "");
 
         keyEditText.setText(key);
         msgEditText.setText(msg);
@@ -132,7 +134,7 @@ public abstract class CipherFragment extends Fragment {
     // Prints the error msg as red text on the output field
     public void printErrorMessage(Cipher cipher) {
         // Creates a string that is inherently red, so the text colour of the textView doesn't need to be changed
-        String errorMsg = getResources().getString(cipher.getERROR_MSG());
+        String errorMsg = getResources().getString(cipher.getErrorMsg());
         SpannableString spannableError = new SpannableString(errorMsg);
         spannableError.setSpan(new ForegroundColorSpan(Color.RED), 0, errorMsg.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 

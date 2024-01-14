@@ -23,23 +23,23 @@ public class Cipher {
         this.TYPE = TYPE;
     }
 
-    public int getLAYOUT() {
+    public int getLayout() {
         return LAYOUT;
     }
 
-    public int getERROR_MSG() {
+    public int getErrorMsg() {
         return ERROR_MSG;
     }
 
-    public Cipher.Type getTYPE() {
+    public Cipher.Type getType() {
         return TYPE;
     }
 
-    public int getUSAGE() {
+    public int getUsage() {
         return USAGE;
     }
 
-    public int getDESCRIPTION() {
+    public int getDescription() {
         return DESCRIPTION;
     }
 
