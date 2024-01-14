@@ -80,24 +80,10 @@ public class XORFragment extends CipherFragment {
 
     @Override
     public void onPause(){
+        toggleBinarySwitch.setChecked(false);
         super.onPause();
-        SharedPreferences prefs = getActivity().getPreferences(Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putBoolean(getCipher().getType().toString() + "binaryToggle", toggleBinarySwitch.isChecked());
-        editor.apply();
-    }
-
-    @Override
-    public void onResume(){
-        SharedPreferences prefs = getActivity().getPreferences(Context.MODE_PRIVATE);
-        boolean isToggled = prefs.getBoolean(getCipher().getType().toString() + "binaryToggle", false);
-        toggleBinarySwitch.setChecked(isToggled);
-
-        // Must be after switch gets toggled, to avoid creating binary string out of the existing binary string
-        // because the onBinaryToggle gets triggered
-        super.onResume();
-
    }
+
 
 }
 
