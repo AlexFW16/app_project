@@ -14,7 +14,8 @@ android apps, service, sensor, or sensor API.
 ### TODO
 - [X] Template activity for standard ciphers, must be adapted depending on which cipher is used at runtime
 - [ ] Make input fields, etc. look nice
-- [ ] Make 2 colour schemes, one for decrypting and one for encrypting 
+- [ ] Make 2 colour schemes, one for decrypting and one for encrypting
+- [ ] Debug Ciphers (especially Vigenere)
 - [ ] Update settings page
 - [ ] Put strings from update password xml into strings.xml
 - [X] Add another fragment (bottom) that is used to display more detailed information (xor: binary code, ...)
