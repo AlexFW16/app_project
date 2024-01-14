@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="16dp"
-            android:text="@string/app_title"
+            android:text="@string/about_made_by"
             android:textSize="24sp" />
 
         <TextView
@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="8dp"
-            android:text="Version 0.3.1" />
+            android:text="@string/app_version"/>
          <!-- Replace with your app version -->
 
 

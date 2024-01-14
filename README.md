@@ -21,11 +21,11 @@ android apps, service, sensor, or sensor API.
   -> Just use the same id for the same buttons etc.
 - [X] Error messages for wrong input in encryption
 - [X] Change binary mode to switch instead of button
-- [ ] Debug XOR cipher
+- [X] Debug XOR cipher
 - [ ] (We could also add the option to save inputs and have a history -> Lot of work, for now only the last used snapshot)
 - [ ] Add switch button (output text and msg)
-- [ ] Descriptions/how to use for all ciphers
-- [ ] Maybe issues when restoring data with isBinary in XOR?
+- [X] Descriptions/how to use for all ciphers
+- [X] Maybe issues when restoring data with isBinary in XOR?
 - [ ] (Add key/password generator)
 
 
