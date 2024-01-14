@@ -97,34 +97,14 @@ public abstract class CipherFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        // Saves the current in/outputs in the cipher fragment into the shared prefs
+        saveToPrefs();
 
-        SharedPreferences prefs = getActivity().getPreferences(Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putString(getCipher().getType().toString() + "key", keyEditText.getText().toString());
-        editor.putString(getCipher().getType().toString() + "msg", msgEditText.getText().toString());
-        // Previous error msg should not be saved
-        if (outputTextView.getText().toString().equals(getResources().getString(getCipher().getErrorMsg())))
-            editor.putString(getCipher().getType().toString() + "out", "");
-        else
-            editor.putString(getCipher().getType().toString() + "out", outputTextView.getText().toString());
-
-        editor.apply();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-
-        // Loads the latest in/outputs into the current cipher
-        SharedPreferences prefs = getActivity().getPreferences(Context.MODE_PRIVATE);
-        String key = prefs.getString(getCipher().getType().toString() + "key", "");
-        String msg = prefs.getString(getCipher().getType().toString() + "msg", "");
-        String out = prefs.getString(getCipher().getType().toString() + "out", "");
-
-        keyEditText.setText(key);
-        msgEditText.setText(msg);
-        outputTextView.setText(out);
+        loadFromPrefs();
     }
 
     @Override
@@ -143,6 +123,34 @@ public abstract class CipherFragment extends Fragment {
 
         outputTextView.setText(spannableError);
 
+    }
+
+    // Saves the current in/outputs in the cipher fragment into the shared prefs
+    public void saveToPrefs() {
+        SharedPreferences prefs = getActivity().getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString(getCipher().getType().toString() + "key", keyEditText.getText().toString());
+        editor.putString(getCipher().getType().toString() + "msg", msgEditText.getText().toString());
+        // Previous error msg should not be saved
+        if (outputTextView.getText().toString().equals(getResources().getString(getCipher().getErrorMsg())))
+            editor.putString(getCipher().getType().toString() + "out", "");
+        else
+            editor.putString(getCipher().getType().toString() + "out", outputTextView.getText().toString());
+
+        editor.apply();
+    }
+
+    private void loadFromPrefs() {
+
+        // Loads the latest in/outputs into the current cipher
+        SharedPreferences prefs = getActivity().getPreferences(Context.MODE_PRIVATE);
+        String key = prefs.getString(getCipher().getType().toString() + "key", "");
+        String msg = prefs.getString(getCipher().getType().toString() + "msg", "");
+        String out = prefs.getString(getCipher().getType().toString() + "out", "");
+
+        keyEditText.setText(key);
+        msgEditText.setText(msg);
+        outputTextView.setText(out);
     }
 
 

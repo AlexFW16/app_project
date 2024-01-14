@@ -44,8 +44,8 @@
 
     <!-- settings -->
     <string name="settings_title"> Settings </string>
-    <string name="settings_change_email">Change</string>
-    <string name="settings_change_password">Change</string>
+    <string name="settings_change_email">Change Email</string>
+    <string name="settings_change_password">Change Password</string>
 
     <!-- about -->
     <string name="about_title">About</string>

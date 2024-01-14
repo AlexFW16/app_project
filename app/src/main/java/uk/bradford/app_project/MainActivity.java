@@ -24,10 +24,12 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentManager;
 
 import java.util.ArrayList;
 
 import uk.bradford.app_project.fragments.AboutFragment;
+import uk.bradford.app_project.fragments.CipherFragment;
 import uk.bradford.app_project.fragments.DescriptionFragment;
 import uk.bradford.app_project.fragments.SettingsFragment;
 import uk.bradford.app_project.fragments.SubstitutionFragment;
@@ -123,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
             descriptionFragment = new DescriptionFragment(cipher);
 
         } else if (id == R.id.nav_item5) {
-            fragment = new SettingsFragment(user);
+            fragment = new SettingsFragment();
 
         } else if (id == R.id.nav_item6) {
             fragment = new AboutFragment();
@@ -188,6 +190,18 @@ public class MainActivity extends AppCompatActivity {
 
     // Creates a snapshot of all the current ciphers
     private CipherSnapshot createCipherSnapshot() {
+
+        // Save the last open cipher to prefs, as this might not have been done
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        Fragment currentFragment = fragmentManager.findFragmentById(R.id.fragment_container_1);
+
+        if (currentFragment instanceof CipherFragment){
+            CipherFragment fragment = (CipherFragment) currentFragment;
+            fragment.saveToPrefs();
+        }
+
+
+
         SharedPreferences prefs = this.getPreferences(Context.MODE_PRIVATE);
         ArrayList<ArrayList<String>> ciphers = new ArrayList<>();
 

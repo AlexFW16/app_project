@@ -15,6 +15,8 @@ android apps, service, sensor, or sensor API.
 - [X] Template activity for standard ciphers, must be adapted depending on which cipher is used at runtime
 - [ ] Make input fields, etc. look nice
 - [ ] Make 2 colour schemes, one for decrypting and one for encrypting 
+- [ ] Update settings page
+- [ ] Put strings from update password xml into strings.xml
 - [X] Add another fragment (bottom) that is used to display more detailed information (xor: binary code, ...)
 - [X] Should work? SpeechRecognizer is not properly closed
 - [X] Weird that the fragments change their id's, probably bc they are the same and get overriden on change or smth? 
