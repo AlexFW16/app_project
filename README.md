@@ -1,5 +1,5 @@
 # 0xCrypt
-**Try out how the basic ciphers work**
+**Try out how the basic ciphers work and get some intuition**
 
 ### coursework specifications
 - [X] Comprise of good quality UI with at least two fragments separating all the components.
@@ -33,13 +33,14 @@ android apps, service, sensor, or sensor API.
 - [ ] (We could also add the option to save inputs and have a history -> Lot of work, for now only the last used snapshot)
 
 - ~~Make 2 colour schemes, one for decrypting and one for encrypting~~
-- 
+
 #### Firebase Realtime Database
 - We use the Firebase Authentification Service to provide user accounts
-- The last input is stored on the firebase realtime database
+- The last snapshot of a user is stored on the firebase realtime database (a snapshot contains key, message and output of all ciphers)
+- When the user logs in again, his/her snapshot gets restored and he/she can continue working where he/she left
 
 ### How is MVC implemented?
-- All the encryption/decryption process is done fully in the backend
+- The encryption/decryption process is fully separated from the frontend
 - The cipher fragments simply call encrypt/decrypt with the corresponding cipher and input
 - Furthermore, there is a simple DataModel created, that allows to easily store snapshots that can be saved.
   A snapshot consists of all the users in/output which is stored in the Prefs File locally and online if the
