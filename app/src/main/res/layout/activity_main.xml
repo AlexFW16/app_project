@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
 
 
     <!-- Main content inside the DrawerLayout -->
@@ -65,16 +64,13 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <!-- NavigationView for the drawer -->
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         app:menu="@menu/nav_drawer_menu" />
-
-
-    <!-- NavigationView for the drawer -->
-    <!-- Navigation drawer items -->
 
 
 </androidx.drawerlayout.widget.DrawerLayout>

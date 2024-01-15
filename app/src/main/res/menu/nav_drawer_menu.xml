@@ -1,22 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/nav_item1"
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/nav_item1"
         android:title="@string/cipher1_title" />
-    <item android:id="@+id/nav_item2"
+    <item
+        android:id="@+id/nav_item2"
         android:title="@string/cipher2_title" />
-    <item android:id="@+id/nav_item3"
+    <item
+        android:id="@+id/nav_item3"
         android:title="@string/cipher3_title" />
-    <item android:id="@+id/nav_item4"
-        android:title="@string/cipher4_title"/>
+    <item
+        android:id="@+id/nav_item4"
+        android:title="@string/cipher4_title" />
 
-    <item android:id="@+id/nav_item5"
-        android:title="@string/settings_title"
-        android:drawableStart="@drawable/settings"/>
+    <item
+        android:id="@+id/menu_divider"
+        android:title=""
+        app:actionLayout="@layout/divider_horizontal" />
 
-    <item android:id="@+id/nav_item6"
+    <item
+        android:id="@+id/nav_item5"
+        android:drawableStart="@drawable/settings"
+        android:title="@string/settings_title" />
+
+    <item
+        android:id="@+id/nav_item6"
         android:title="@string/about_title" />
 
-<item android:id="@+id/nav_item7"
-    android:title="@string/logout_title"/>
+    <item
+        android:id="@+id/nav_item7"
+        android:title="@string/logout_title" />
 
 </menu>
