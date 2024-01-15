@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- alert window for changing password -->
+    <!-- alert window for changing email -->
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
@@ -13,18 +13,23 @@
         android:padding="16dp"
         tools:ignore="MissingConstraints">
 
-        <EditText
-            android:id="@+id/oldPasswordEditText"
+        <TextView
+            android:id="@+id/currentEmailTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/change_pswd_old"
-            android:inputType="textPassword"/>
+            android:text=""/>
+        <EditText
+            android:id="@+id/newEmailEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/change_email_email"
+            android:inputType="textEmailAddress"/>
 
         <EditText
-            android:id="@+id/newPasswordEditText"
+            android:id="@+id/passwordEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/change_pswd_new"
+            android:hint="@string/change_email_pswd"
             android:inputType="textPassword"/>
     </LinearLayout>
 

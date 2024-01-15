@@ -4,11 +4,13 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.SurfaceHolder;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
@@ -45,7 +47,6 @@ public class SettingsFragment extends Fragment {
         editPasswordButton.setOnClickListener(view -> changePassword());
         darkModeSwitch.setOnCheckedChangeListener(((buttonView, isChecked) -> changeTheme(isChecked)));
 
-        // Firebase
 
         return rootView;
     }
@@ -67,7 +68,25 @@ public class SettingsFragment extends Fragment {
     }
 
     private void changeEmail() {
-        //TODO do
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle(R.string.change_email_title);
+
+        //TODO rename layout
+        View view = getLayoutInflater().inflate(R.layout.change_email_dialog, null);
+
+        TextView currentEmailView = view.findViewById(R.id.currentEmailTextView);
+        String changeEmailCurrentEmail = getResources().getString(R.string.change_email_current_email);
+        currentEmailView.setText(String.format(changeEmailCurrentEmail,
+                FirebaseAuth.getInstance().getCurrentUser().getEmail().toString()));
+
+
+        builder.setView(view);
+
+        builder.setPositiveButton(R.string.change_email_accept_btn, (dialog, which) -> onPositiveButtonEmailChangeDialog(dialog, which, view));
+        builder.setNegativeButton(R.string.change_email_cancel_btn, ((dialog, which) -> {
+        }));
+
+        builder.create().show();
 
     }
 
@@ -81,7 +100,8 @@ public class SettingsFragment extends Fragment {
         builder.setView(view);
 
         builder.setPositiveButton(R.string.change_pswd_accept_btn, (dialog, which) -> onPositiveButtonPasswordChangeDialog(dialog, which, view));
-        // negative button is not set
+        builder.setNegativeButton(R.string.change_pswd_cancel_btn, ((dialog, which) -> {
+        }));
 
         builder.create().show();
     }
@@ -120,10 +140,40 @@ public class SettingsFragment extends Fragment {
     private void onUpdatePasswordComplete(Task<Void> task) {
         if (task.isSuccessful())
             Toast.makeText(getActivity(), R.string.change_pswd_success, Toast.LENGTH_LONG).show();
-        else Toast.makeText(getActivity(), R.string.change_pswd_update_error, Toast.LENGTH_LONG).show();
+        else
+            Toast.makeText(getActivity(), R.string.change_pswd_update_error, Toast.LENGTH_LONG).show();
 
 
     }
 
+    private void onPositiveButtonEmailChangeDialog(DialogInterface dialog, int which, View view) {
+        String password = ((EditText) view.findViewById(R.id.passwordEditText)).getText().toString();
+        String newEmail = ((EditText) view.findViewById(R.id.newEmailEditText)).getText().toString();
 
+        if (password.isEmpty() || newEmail.isEmpty()) {
+            Toast.makeText(getActivity(), R.string.change_email_emtpy_input, Toast.LENGTH_SHORT).show();
+            return;
+        }
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        AuthCredential credential = EmailAuthProvider.getCredential(user.getEmail(), password);
+        user.reauthenticate(credential).addOnCompleteListener(reAuthTask -> {
+
+            if (!reAuthTask.isSuccessful()) {
+                Toast.makeText(getActivity(), R.string.change_email_wrong_pswd, Toast.LENGTH_SHORT).show();
+                return;
+            }
+            // Deprecated, usually you need an verification email and a website where you can update your email
+            user.updateEmail(newEmail).addOnCompleteListener(this::onUpdateEmailComplete);
+
+
+        });
+
+    }
+
+    private void onUpdateEmailComplete(Task<Void> task) {
+        if (task.isSuccessful())
+            Toast.makeText(getActivity(), R.string.change_email_success, Toast.LENGTH_LONG).show();
+        else
+            Toast.makeText(getActivity(), R.string.change_email_update_error, Toast.LENGTH_LONG).show();
+    }
 }

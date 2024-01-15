@@ -99,7 +99,7 @@
 
     <!-- Change Password Dialog -->
     <string name="change_pswd_old">Old Password</string>
-    <string name="change_pwd_new">New Password</string>
+    <string name="change_pswd_new">New Password</string>
     <string name="change_pswd_title">Change Password</string>
     <string name="change_pswd_accept_btn">Change</string>
     <string name="change_pswd_cancel_btn">Cancel</string>
@@ -107,4 +107,17 @@
     <string name="change_pswd_success">Password changed successfully</string>
     <string name="change_pswd_wrong_pswd">Wrong password, try again</string>
     <string name="change_pswd_update_error">An error occured while updating the password</string>
+    
+    <!-- Change email Dialog -->
+    <string name="change_email_title">Change Email</string>
+    <string name="change_email_email">New Email</string>
+    <string name="change_email_pswd">Password</string>
+    <string name="change_email_accept_btn">Change</string>
+    <string name="change_email_cancel_btn">Cancel</string>
+    <string name="change_email_emtpy_input">Please enter your new Email</string>
+    <string name="change_email_success">Email changed successfully</string>
+    <string name="change_email_wrong_pswd">Wrong password, try again</string>
+    <string name="change_email_update_error">An error occured while updating your email</string>
+    <string name="change_email_current_email">Current Email: %s</string>
+
 </resources>
