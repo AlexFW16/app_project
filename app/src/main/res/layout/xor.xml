@@ -96,7 +96,6 @@
             android:id="@+id/out"
             android:layout_width="380dp"
             android:layout_height="294dp"
-            android:layout_margin="16dp"
             android:background="#FFFFFFFF"
             android:gravity="top|center"
             android:padding="4dp"

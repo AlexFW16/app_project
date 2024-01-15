@@ -39,7 +39,7 @@
 
     <string name="usage_vigenere"> <b>Usage</b> \n Enter your desired key and message as letters. All letters will be converted to uppercase, and no whitespace is allowed.</string>
     <string name="usage_xor"> <b>Usage</b> \n Enter a message and key of your choice. Both will be converted to binary and XORed bit by bit. Toggle the binary switch to view the binary representation, as the ciphertext may not consist of readable symbols.</string>
-    <string name="usage_transposition"> <b>Usage</b> \n Enter a message of your choice. Provide the key as a permutation of positions, separated by whitespace. For example, \"(1 2 3)(10 23)\" will swap places 10 and 23, and shift the first symbol to the second position, the second to the third, and the third to the first position.</string>
+    <string name="usage_transposition"> <b>Usage</b> \n Enter a message of your choice. Provide the key as a permutation of positions, separated by whitespace. For example, \"(1 2 3)(10 23)\" will swap places 10 and 23, and shift the first symbol to the second position, the second to the third, and the third to the first position. 0 is not allowed as an index.</string>
     <string name="usage_substitution"> <b>Usage</b> \n Enter a message of your choice. Provide the key as permutation of symbols without seperating them, as whitespaces are considered symbols. For example, \"(abc)(9@)\" will replace a\'s with b\'s, b\'s with c\'s, and c\'s with a\'s. 9 and @ will be swapped.</string>
 
     <!-- settings -->

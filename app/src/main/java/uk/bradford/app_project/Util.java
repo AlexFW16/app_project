@@ -63,6 +63,9 @@ public class Util {
         for (String cycle : cycles) {
             if (cycle.contains("(") || cycle.contains(")"))
                 throw new IllegalArgumentException("Badly formatted: Wrongly placed \'(\' or \')\'");
+            if(cycle.contains("0"))
+                throw new IllegalArgumentException("Badly formatted: 0 is not allowed as an index");
+
             String[] numbersStrings = cycle.split(" ");
 
             try {
