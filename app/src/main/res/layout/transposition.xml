@@ -84,13 +84,13 @@
 
         <TextView
             android:id="@+id/out"
-            android:layout_width="380dp"
-            android:layout_height="294dp"
-            android:background="#FFFFFFFF"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
             android:gravity="top|left"
             android:padding="4dp"
             android:text="@string/cipher4_output"
-            android:textColor="#000000"
+            android:textColor="@color/black"
             android:textIsSelectable="true"
             android:textSize="18sp" />
 

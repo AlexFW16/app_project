@@ -1,15 +1,18 @@
 package uk.bradford.app_project.fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 
 import com.google.firebase.auth.AuthCredential;
@@ -25,6 +28,8 @@ public class SettingsFragment extends Fragment {
 
     private Button editEmailButton, editPasswordButton;
 
+    private Switch darkModeSwitch;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -34,14 +39,31 @@ public class SettingsFragment extends Fragment {
 
         editEmailButton = rootView.findViewById(R.id.settings_change_email);
         editPasswordButton = rootView.findViewById(R.id.settings_change_password);
+        darkModeSwitch = rootView.findViewById(R.id.dark_mode_switch);
 
 
         editEmailButton.setOnClickListener(view -> changeEmail());
         editPasswordButton.setOnClickListener(view -> changePassword());
+        darkModeSwitch.setOnCheckedChangeListener(((buttonView, isChecked) -> changeTheme(isChecked)));
 
         // Firebase
 
         return rootView;
+    }
+
+    private void changeTheme(boolean darkMode) {
+        if (darkMode) {
+            getActivity().setTheme(R.style.Base_Theme_App_project_Dark);
+            getActivity().recreate();
+            Log.e("theme", "dark");
+        } else {
+
+            Log.e("theme", "light");
+            getActivity().setTheme(R.style.Base_Theme_App_project);
+            getActivity().recreate();
+        }
+
+
     }
 
     private void changeEmail() {

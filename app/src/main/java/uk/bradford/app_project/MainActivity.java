@@ -2,6 +2,7 @@ package uk.bradford.app_project;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -50,6 +51,13 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+       // setTheme(R.style.Base_Theme_App_project_dark);
+        //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES); // for dark mode
+        //recreate();
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -195,11 +203,10 @@ public class MainActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         Fragment currentFragment = fragmentManager.findFragmentById(R.id.fragment_container_1);
 
-        if (currentFragment instanceof CipherFragment){
+        if (currentFragment instanceof CipherFragment) {
             CipherFragment fragment = (CipherFragment) currentFragment;
             fragment.saveToPrefs();
         }
-
 
 
         SharedPreferences prefs = this.getPreferences(Context.MODE_PRIVATE);
