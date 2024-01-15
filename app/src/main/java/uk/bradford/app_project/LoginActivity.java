@@ -71,29 +71,20 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-    // Login is always called before a user enters the main app -> ensure the right user data is there
     private void login(FirebaseUser user) {
-        updateUI(user);
         if (user != null) {
             updateUI(user); // updates UI as if user had just signed in
         }
-
-        //TODO restore user data to prefs
-
-        //restoreUserData(mAuth.getCurrentUser());
     }
 
     private void login(String email, String password) {
-        if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
-            //debug ??
-            Log.w("Register", "Email or password is empty");
-            Toast.makeText(LoginActivity.this, "Email or password cannot be emtpy", Toast.LENGTH_LONG);
+        if (email.isEmpty() || password.isEmpty()) {
+            Log.w("Login", "Email or password is empty");
+            Toast.makeText(getApplicationContext(), R.string.login_empty_field, Toast.LENGTH_LONG).show();
+            return;
         }
 
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this::onCompleteFirebaseLogin);
-
-        //TODO restore user data to prefs
-        //restoreUserDataToPrefs(mAuth.getCurrentUser());
     }
 
     private void onCompleteFirebaseLogin(@NonNull Task<AuthResult> task) {
@@ -103,7 +94,7 @@ public class LoginActivity extends AppCompatActivity {
             FirebaseUser user = mAuth.getCurrentUser();
             updateUI(user);
         } else {
-            // If sign in fails, display a message to the user.
+            // Sign in failed
             Log.w("FirebaseAuth", "signInWithEmail:failure", task.getException());
             Toast.makeText(getApplicationContext(), "Authentication failed.", Toast.LENGTH_SHORT).show();
             updateUI(null);
@@ -116,12 +107,10 @@ public class LoginActivity extends AppCompatActivity {
             // Login failed
             //TODO
         } else { // Login successful
-            Toast.makeText(LoginActivity.this, "You are logged in!", Toast.LENGTH_SHORT).show();
-
+            Toast.makeText(getApplicationContext(), "You are logged in!", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
             finish();
-
         }
 
     }

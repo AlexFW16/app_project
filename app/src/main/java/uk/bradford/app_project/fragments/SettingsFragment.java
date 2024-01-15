@@ -1,5 +1,6 @@
 package uk.bradford.app_project.fragments;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,19 +9,17 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import uk.bradford.app_project.MainActivity;
 import uk.bradford.app_project.R;
 
 public class SettingsFragment extends Fragment {
@@ -52,6 +51,7 @@ public class SettingsFragment extends Fragment {
     }
 
     private void changeTheme(boolean darkMode) {
+        //TODO not working
         if (darkMode) {
             getActivity().setTheme(R.style.Base_Theme_App_project_Dark);
             getActivity().recreate();
@@ -67,65 +67,61 @@ public class SettingsFragment extends Fragment {
     }
 
     private void changeEmail() {
-        //TODO
+        //TODO do
 
     }
 
 
     private void changePassword() {
-// Create an AlertDialog TODO maybe change getActivity if not working
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("Change Password");
+        builder.setTitle(R.string.change_pswd_title);
 
-// Set the layout for the dialog
+        // inflates the layout and sets the view
         View view = getLayoutInflater().inflate(R.layout.change_password_dialog, null);
         builder.setView(view);
 
-// Set up the input fields in the dialog
-        EditText oldPasswordEditText = view.findViewById(R.id.oldPasswordEditText);
-        EditText newPasswordEditText = view.findViewById(R.id.newPasswordEditText);
+        builder.setPositiveButton(R.string.change_pswd_accept_btn, (dialog, which) -> onPositiveButtonPasswordChangeDialog(dialog, which, view));
+        // negative button is not set
 
-// Set up the buttons in the dialog
-        builder.setPositiveButton("Change", (dialog, which) -> {
-            String oldPassword = oldPasswordEditText.getText().toString();
-            String newPassword = newPasswordEditText.getText().toString();
-
-            // Validate and change password
-            if (!oldPassword.isEmpty() && !newPassword.isEmpty()) {
-                // Get the current user
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-                // Example using the user's current password for re-authentication
-                AuthCredential credential = EmailAuthProvider.getCredential(user.getEmail(), oldPassword);
-                user.reauthenticate(credential).addOnCompleteListener(reAuthTask -> {
-                    if (reAuthTask.isSuccessful()) {
-                        // User successfully re-authenticated, proceed to change password
-                        user.updatePassword(newPassword).addOnCompleteListener(task -> {
-                            if (task.isSuccessful()) {
-                                // Password updated successfully
-                                // You may want to inform the user or take additional actions
-                            } else {
-                                // Password update failed
-                                // You can handle the error here
-                            }
-                        });
-                    } else {
-                        // Re-authentication failed, handle the error
-                        Toast.makeText(getActivity(), "Wrong password, try again", Toast.LENGTH_SHORT).show();
-                    }
-                });
-            } else {
-                // Handle empty fields
-                Toast.makeText(getActivity(), "Please enter both old and new passwords", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        builder.setNegativeButton("Cancel", (dialog, which) -> {
-            // User clicked Cancel
-        });
-
-// Show the AlertDialog
         builder.create().show();
+    }
+
+
+    private void onPositiveButtonPasswordChangeDialog(DialogInterface dialog, int which, View view) {
+
+        String oldPassword = ((EditText) view.findViewById(R.id.oldPasswordEditText)).getText().toString();
+        String newPassword = ((EditText) view.findViewById(R.id.newPasswordEditText)).getText().toString();
+
+        // Validate and change password
+        if (oldPassword.isEmpty() || newPassword.isEmpty()) {
+            Toast.makeText(getActivity(), R.string.change_pswd_emtpy_input, Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Get the current user
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        // Try to authenticate the user
+        AuthCredential credential = EmailAuthProvider.getCredential(user.getEmail(), oldPassword);
+        user.reauthenticate(credential).addOnCompleteListener(reAuthTask -> {
+
+            //Authentication failed
+            if (!reAuthTask.isSuccessful()) {
+                Toast.makeText(getActivity(), R.string.change_pswd_wrong_pswd, Toast.LENGTH_SHORT).show();
+                return;
+            }
+            // User successfully re-authenticated, proceed to change password
+            user.updatePassword(newPassword).addOnCompleteListener(this::onUpdatePasswordComplete);
+
+        });
+
+    }
+
+    private void onUpdatePasswordComplete(Task<Void> task) {
+        if (task.isSuccessful())
+            Toast.makeText(getActivity(), R.string.change_pswd_success, Toast.LENGTH_LONG).show();
+        else Toast.makeText(getActivity(), R.string.change_pswd_update_error, Toast.LENGTH_LONG).show();
+
 
     }
 

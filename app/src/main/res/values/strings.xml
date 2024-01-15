@@ -21,6 +21,8 @@
     <string name="login_login_button">Login</string>
     <string name="login_register_button">To Registration</string>
 
+    <string name="login_empty_field">Email or password cannot be emtpy</string>
+
 
     <!-- Registration -->
     <string name="registration_title">Register</string>
@@ -88,9 +90,21 @@
     <string name="cipher4_decryption_btn">Decrypt</string>
     <string name="cipher4_output">Cipher or message</string>
 
+    <!-- Other -->
     <!-- Error messages -->
     <string name="input_error_vigenere">Message or key contains symbols different than letters"</string>
     <string name="input_error_xor">Badly formatted input, refer to usage and description</string>
     <string name="input_error_substitution">Badly formatted input, refer to usage and description</string>
     <string name="input_error_transposition">Badly formatted input, refer to usage and description</string>
+
+    <!-- Change Password Dialog -->
+    <string name="change_pswd_old">Old Password</string>
+    <string name="change_pwd_new">New Password</string>
+    <string name="change_pswd_title">Change Password</string>
+    <string name="change_pswd_accept_btn">Change</string>
+    <string name="change_pswd_cancel_btn">Cancel</string>
+    <string name="change_pswd_emtpy_input">Please enter both old and new passwords</string>
+    <string name="change_pswd_success">Password changed successfully</string>
+    <string name="change_pswd_wrong_pswd">Wrong password, try again</string>
+    <string name="change_pswd_update_error">An error occured while updating the password</string>
 </resources>
