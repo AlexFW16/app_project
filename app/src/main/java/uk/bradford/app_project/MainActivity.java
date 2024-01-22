@@ -138,7 +138,10 @@ public class MainActivity extends AppCompatActivity {
         } else if (id == R.id.nav_item7) {
             return logout(user);
 
-        } else {
+        } else if (id == R.id.menu_divider) {
+            return true;
+        }
+        else {
             Log.e("NavigationView", "Invalid menu item id");
             fragment = null;
         }

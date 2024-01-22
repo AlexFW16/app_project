@@ -58,16 +58,16 @@
     <!-- Ciphers -->
     <!-- Vigenere -->
     <string name="cipher1_title"> Vigenere Cipher</string>
-    <string name="cipher1_msg">Decryption/Encryption</string>
-    <string name="cipher1_key">Decryption/Encryption</string>
+    <string name="cipher1_msg">Message</string>
+    <string name="cipher1_key">Key</string>
     <string name="cipher1_encryption_btn">Encrypt</string>
     <string name="cipher1_decryption_btn">Decrypt</string>
     <string name="cipher1_output">Cipher or message</string>
 
     <!-- XOR -->
     <string name="cipher2_title"> XOR Cipher</string>
-    <string name="cipher2_msg">Decryption/Encryption</string>
-    <string name="cipher2_key">Decryption/Encryption</string>
+    <string name="cipher2_msg">Message</string>
+    <string name="cipher2_key">Key</string>
     <string name="cipher2_encryption_btn">Encrypt</string>
     <string name="cipher2_decryption_btn">Decrypt</string>
     <string name="cipher2_output">Cipher or message</string>
@@ -76,16 +76,16 @@
 
     <!-- Substitution-->
     <string name="cipher3_title"> Substitution Cipher</string>
-    <string name="cipher3_msg">Decryption/Encryption</string>
-    <string name="cipher3_key">Decryption/Encryption</string>
+    <string name="cipher3_msg">Message</string>
+    <string name="cipher3_key">Key</string>
     <string name="cipher3_encryption_btn">Encrypt</string>
     <string name="cipher3_decryption_btn">Decrypt</string>
     <string name="cipher3_output">Cipher or message</string>
 
     <!-- Transposition -->
     <string name="cipher4_title"> Transposition Cipher</string>
-    <string name="cipher4_msg">Decryption/Encryption</string>
-    <string name="cipher4_key">Decryption/Encryption</string>
+    <string name="cipher4_msg">Message</string>
+    <string name="cipher4_key">Key</string>
     <string name="cipher4_encryption_btn">Encrypt</string>
     <string name="cipher4_decryption_btn">Decrypt</string>
     <string name="cipher4_output">Cipher or message</string>
