@@ -27,67 +27,19 @@ import uk.bradford.app_project.R;
 public class SettingsFragment extends Fragment {
 
 
-    private Button editEmailButton, editPasswordButton;
-
-    private Switch darkModeSwitch;
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.settings, container, false);
 
 
-        editEmailButton = rootView.findViewById(R.id.settings_change_email);
-        editPasswordButton = rootView.findViewById(R.id.settings_change_password);
-        darkModeSwitch = rootView.findViewById(R.id.dark_mode_switch);
+        Button editPasswordButton = rootView.findViewById(R.id.settings_change_password);
 
 
-        editEmailButton.setOnClickListener(view -> changeEmail());
         editPasswordButton.setOnClickListener(view -> changePassword());
-        darkModeSwitch.setOnCheckedChangeListener(((buttonView, isChecked) -> changeTheme(isChecked)));
 
 
         return rootView;
-    }
-
-    private void changeTheme(boolean darkMode) {
-        //TODO not working
-        if (darkMode) {
-            getActivity().setTheme(R.style.Base_Theme_App_project_Dark);
-            getActivity().recreate();
-            Log.e("theme", "dark");
-        } else {
-
-            Log.e("theme", "light");
-            getActivity().setTheme(R.style.Base_Theme_App_project);
-            getActivity().recreate();
-        }
-
-
-    }
-
-    private void changeEmail() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle(R.string.change_email_title);
-
-        //TODO rename layout
-        View view = getLayoutInflater().inflate(R.layout.change_email_dialog, null);
-
-        TextView currentEmailView = view.findViewById(R.id.currentEmailTextView);
-        String changeEmailCurrentEmail = getResources().getString(R.string.change_email_current_email);
-        currentEmailView.setText(String.format(changeEmailCurrentEmail,
-                FirebaseAuth.getInstance().getCurrentUser().getEmail().toString()));
-
-
-        builder.setView(view);
-
-        builder.setPositiveButton(R.string.change_email_accept_btn, (dialog, which) -> onPositiveButtonEmailChangeDialog(dialog, which, view));
-        builder.setNegativeButton(R.string.change_email_cancel_btn, ((dialog, which) -> {
-        }));
-
-        builder.create().show();
-
     }
 
 
@@ -146,7 +98,47 @@ public class SettingsFragment extends Fragment {
 
     }
 
-    private void onPositiveButtonEmailChangeDialog(DialogInterface dialog, int which, View view) {
+ /*
+Not working yet, can be implemented in the future
+
+    private void changeTheme(boolean darkMode) {
+        if (darkMode) {
+            getActivity().setTheme(R.style.Base_Theme_App_project_Dark);
+            getActivity().recreate();
+            Log.e("theme", "dark");
+        } else {
+
+            Log.e("theme", "light");
+            getActivity().setTheme(R.style.Base_Theme_App_project);
+            getActivity().recreate();
+        }
+
+
+    }
+
+    private void changeEmail() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle(R.string.change_email_title);
+
+        //TODO rename layout
+        View view = getLayoutInflater().inflate(R.layout.change_email_dialog, null);
+
+        TextView currentEmailView = view.findViewById(R.id.currentEmailTextView);
+        String changeEmailCurrentEmail = getResources().getString(R.string.change_email_current_email);
+        currentEmailView.setText(String.format(changeEmailCurrentEmail,
+                FirebaseAuth.getInstance().getCurrentUser().getEmail().toString()));
+
+
+        builder.setView(view);
+
+        builder.setPositiveButton(R.string.change_email_accept_btn, (dialog, which) -> onPositiveButtonEmailChangeDialog(dialog, which, view));
+        builder.setNegativeButton(R.string.change_email_cancel_btn, ((dialog, which) -> {
+        }));
+
+        builder.create().show();
+
+    }
+       private void onPositiveButtonEmailChangeDialog(DialogInterface dialog, int which, View view) {
         String password = ((EditText) view.findViewById(R.id.passwordEditText)).getText().toString();
         String newEmail = ((EditText) view.findViewById(R.id.newEmailEditText)).getText().toString();
 
@@ -176,4 +168,7 @@ public class SettingsFragment extends Fragment {
         else
             Toast.makeText(getActivity(), R.string.change_email_update_error, Toast.LENGTH_LONG).show();
     }
+
+ */
+
 }
