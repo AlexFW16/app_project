@@ -51,7 +51,7 @@
 
     <!-- about -->
     <string name="about_title">About</string>
-    <string name="about_made_by">Alexander P. &amp; Abdulaziz A. </string>
+    <string name="about_made_by"> By Alexander P., Abdulaziz A. \nand Razan A.</string>
     <string name="app_version">Version 0.8.1</string>
     <string name="about_description"> <b>Purpose of this app</b> \n\ This app provides a simple way to play around with simple ciphers, encrypting and decrypting messages to gain intuition for this process. More ciphers and more detailed insight into the encryption/decryption process will be added in the future.</string>
 
