@@ -1,15 +1,15 @@
 package uk.bradford.app_project.fragments;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
-import android.widget.Switch;
 
+import androidx.appcompat.widget.SwitchCompat;
+
+import java.util.Objects;
 
 import uk.bradford.app_project.Cipher;
 import uk.bradford.app_project.Crypto;
@@ -18,11 +18,11 @@ import uk.bradford.app_project.Util;
 
 public class XORFragment extends CipherFragment {
 
-    private Switch toggleBinarySwitch;
+    private SwitchCompat toggleBinarySwitch;
 
     @Override
     public Cipher getCipher() {
-        return new Cipher(R.layout.xor, R.string.input_error_xor, R.string.usage_xor, R.string.description_xor, Cipher.Type.XOR );
+        return new Cipher(R.layout.xor, R.string.input_error_xor, R.string.usage_xor, R.string.description_xor, Cipher.Type.XOR);
     }
 
 
@@ -30,6 +30,7 @@ public class XORFragment extends CipherFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View rootView = super.onCreateView(inflater, container, savedInstanceState);
+        assert rootView != null;
         toggleBinarySwitch = rootView.findViewById(R.id.toggle_binary);
 
         super.encryptBtn.setOnClickListener(this::onEncryptButtonClick);
@@ -48,10 +49,8 @@ public class XORFragment extends CipherFragment {
 
             outputTextView.setText(encryptedText);
         } catch (IllegalArgumentException e) {
-
             printErrorMessage(getCipher());
-            // Toast.makeText(getActivity().getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-            Log.e("IllegalArgumentException", e.getMessage());
+            Log.e("IllegalArgumentException", Objects.requireNonNull(e.getMessage()));
         }
     }
 
@@ -63,9 +62,8 @@ public class XORFragment extends CipherFragment {
                 decryptedText = Util.fromStringToBinaryString(decryptedText);
             outputTextView.setText(decryptedText);
         } catch (IllegalArgumentException e) {
-            // TODO Toast
             printErrorMessage(getCipher());
-            Log.e("IllegalArgumentException", e.getMessage());
+            Log.e("IllegalArgumentException", Objects.requireNonNull(e.getMessage()));
         }
 
     }
@@ -79,10 +77,10 @@ public class XORFragment extends CipherFragment {
     }
 
     @Override
-    public void onPause(){
+    public void onPause() {
         toggleBinarySwitch.setChecked(false);
         super.onPause();
-   }
+    }
 
 
 }

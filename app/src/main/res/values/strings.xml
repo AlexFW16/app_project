@@ -1,14 +1,5 @@
 <resources>
 
-    <!-- Will be removed bc starting screen will not be used! -->
-    <string name="vigenere_button">Vigenere Cipher</string>
-    <string name="cipher2_button">Cipher 2</string>
-    <string name="cipher3_button">Cipher 3</string>
-    <string name="cipher4_button">Cipher 4</string>
-    <string name="cipher5_button">Cipher 4</string>
-    <string name="cipher6_button">Cipher 4</string>
-    <!--                                                  -->
-
 
     <!-- general -->
     <string name="app_title">0xCrypt</string>
@@ -21,7 +12,7 @@
     <string name="login_login_button">Login</string>
     <string name="login_register_button">To Registration</string>
 
-    <string name="login_empty_field">Email or password cannot be emtpy</string>
+    <string name="login_empty_field">Email or password cannot be empty</string>
 
 
     <!-- Registration -->
@@ -32,7 +23,7 @@
     <string name="registration_back_button">Back to Login</string>
 
     <!-- Descriptions -->
-    <string name="description_vigenere"> <b>Description</b> \n The Vigenère cipher is a method of encrypting alphabetic text by using a simple form of polyalphabetic substitution. Instead of using a single fixed substitution for each letter, like in the Caesar cipher, the Vigenère cipher uses a key to determine different substitutions for each letter. The key is repeated to match the length of the message, and each letter in the message is shifted according to its corresponding letter in the key.</string>
+    <string name="description_vigenere"> <b>Description</b> \n The Vigenère cipher is a method of encrypting alphabetic text by using a simple form of poly-alphabetic substitution. Instead of using a single fixed substitution for each letter, like in the Caesar cipher, the Vigenère cipher uses a key to determine different substitutions for each letter. The key is repeated to match the length of the message, and each letter in the message is shifted according to its corresponding letter in the key.</string>
     <string name="description_xor"> <b>Description</b> \n The XOR (exclusive OR) cipher is a simple and bitwise encryption technique. It operates by applying the XOR operation between each character of the plaintext and a corresponding character in a secret key. The ciphertext is produced by this bitwise operation.</string>
     <string name="description_transposition"> <b>Description</b> \nA transposition cipher involves rearranging the order of characters in the plaintext to create the ciphertext. Unlike substitution ciphers, transposition ciphers do not replace the characters; instead, they change the position of the characters inside the string.</string>
     <string name="description_substitution"> <b>Description</b> \n A substitution cipher is a method of encryption where each letter in the plaintext is replaced with another letter or symbol according to a predetermined system. The most straightforward example is the Caesar cipher, which shifts each letter by a fixed amount.</string>
@@ -42,7 +33,7 @@
     <string name="usage_vigenere"> <b>Usage</b> \n Enter your desired key and message as letters. All letters will be converted to uppercase, and no whitespace is allowed.</string>
     <string name="usage_xor"> <b>Usage</b> \n Enter a message and key of your choice. Both will be converted to binary and XORed bit by bit. Toggle the binary switch to view the binary representation, as the ciphertext may not consist of readable symbols.</string>
     <string name="usage_transposition"> <b>Usage</b> \n Enter a message of your choice. Provide the key as a permutation of positions, separated by whitespace. For example, \"(1 2 3)(10 23)\" will swap places 10 and 23, and shift the first symbol to the second position, the second to the third, and the third to the first position. 0 is not allowed as an index.</string>
-    <string name="usage_substitution"> <b>Usage</b> \n Enter a message of your choice. Provide the key as permutation of symbols without seperating them, as whitespaces are considered symbols. For example, \"(abc)(9@)\" will replace a\'s with b\'s, b\'s with c\'s, and c\'s with a\'s. 9 and @ will be swapped.</string>
+    <string name="usage_substitution"> <b>Usage</b> \n Enter a message of your choice. Provide the key as permutation of symbols without separating them, as whitespaces are considered symbols. For example, \"(abc)(9@)\" will replace a\'s with b\'s, b\'s with c\'s, and c\'s with a\'s. 9 and @ will be swapped.</string>
 
     <!-- settings -->
     <string name="settings_title"> Settings </string>
@@ -51,43 +42,34 @@
 
     <!-- about -->
     <string name="about_title">About</string>
+    <string name="about_img_description">Lock</string>
     <string name="about_made_by"> By Alexander P., Abdulaziz A. \nand Razan A.</string>
-    <string name="app_version">Version 0.8.1</string>
+    <string name="app_version">Version 1.0</string>
     <string name="about_description"> <b>Purpose of this app</b> \n\ This app provides a simple way to play around with simple ciphers, encrypting and decrypting messages to gain intuition for this process. More ciphers and more detailed insight into the encryption/decryption process will be added in the future.</string>
 
     <!-- Ciphers -->
+    <string name="cipher_microphone">microphone</string>
+    <string name="msg">Message</string>
+    <string name="key">Key</string>
+    <string name="encrypt_button">Encrypt</string>
+    <string name="decrypt_button">Decrypt</string>
+
     <!-- Vigenere -->
     <string name="cipher1_title"> Vigenere Cipher</string>
-    <string name="cipher1_msg">Message</string>
-    <string name="cipher1_key">Key</string>
-    <string name="cipher1_encryption_btn">Encrypt</string>
-    <string name="cipher1_decryption_btn">Decrypt</string>
     <string name="cipher1_output">Cipher or message</string>
 
     <!-- XOR -->
     <string name="cipher2_title"> XOR Cipher</string>
-    <string name="cipher2_msg">Message</string>
-    <string name="cipher2_key">Key</string>
-    <string name="cipher2_encryption_btn">Encrypt</string>
-    <string name="cipher2_decryption_btn">Decrypt</string>
     <string name="cipher2_output">Cipher or message</string>
 
     <string name="cipher2_toggle_binary">BIN</string>
 
     <!-- Substitution-->
     <string name="cipher3_title"> Substitution Cipher</string>
-    <string name="cipher3_msg">Message</string>
-    <string name="cipher3_key">Key</string>
-    <string name="cipher3_encryption_btn">Encrypt</string>
-    <string name="cipher3_decryption_btn">Decrypt</string>
     <string name="cipher3_output">Cipher or message</string>
 
     <!-- Transposition -->
     <string name="cipher4_title"> Transposition Cipher</string>
-    <string name="cipher4_msg">Message</string>
-    <string name="cipher4_key">Key</string>
-    <string name="cipher4_encryption_btn">Encrypt</string>
-    <string name="cipher4_decryption_btn">Decrypt</string>
     <string name="cipher4_output">Cipher or message</string>
 
     <!-- Other -->
@@ -96,6 +78,10 @@
     <string name="input_error_xor">Badly formatted input, refer to usage and description</string>
     <string name="input_error_substitution">Badly formatted input, refer to usage and description</string>
     <string name="input_error_transposition">Badly formatted input, refer to usage and description</string>
+    
+    <string name="cipher_is_null_error">An unexpected error occurred</string>
+    <string name="change_pswd_user_null_error">An unexpected error occurred</string>
+    <string name="login_failed">Login failed</string>
 
     <!-- Change Password Dialog -->
     <string name="change_pswd_old">Old Password</string>
@@ -103,11 +89,11 @@
     <string name="change_pswd_title">Change Password</string>
     <string name="change_pswd_accept_btn">Change</string>
     <string name="change_pswd_cancel_btn">Cancel</string>
-    <string name="change_pswd_emtpy_input">Please enter both old and new passwords</string>
+    <string name="change_pswd_emtpy_input">Please enter both your old and new password</string>
     <string name="change_pswd_success">Password changed successfully</string>
     <string name="change_pswd_wrong_pswd">Wrong password, try again</string>
-    <string name="change_pswd_update_error">An error occured while updating the password</string>
-    
+    <string name="change_pswd_update_error">An error occurred while updating the password</string>
+
     <!-- Change email Dialog -->
     <string name="change_email_title">Change Email</string>
     <string name="change_email_email">New Email</string>
@@ -117,7 +103,7 @@
     <string name="change_email_emtpy_input">Please enter your new Email</string>
     <string name="change_email_success">Email changed successfully</string>
     <string name="change_email_wrong_pswd">Wrong password, try again</string>
-    <string name="change_email_update_error">An error occured while updating your email</string>
+    <string name="change_email_update_error">An error occurred while updating your email</string>
     <string name="change_email_current_email">Current Email: %s</string>
 
 </resources>

@@ -22,7 +22,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:src="@drawable/baseline_enhanced_encryption_24" ></ImageView> <!-- Replace with your app icon -->
+            android:src="@drawable/baseline_enhanced_encryption_24"
+            android:contentDescription="@string/about_img_description" />
 
 
         <TextView
@@ -40,7 +41,6 @@
             android:layout_gravity="center"
             android:layout_marginTop="8dp"
             android:text="@string/app_version"/>
-         <!-- Replace with your app version -->
 
 
         <TextView
@@ -50,8 +50,6 @@
             android:gravity="center"
             android:text="@string/about_description"
             android:textSize="16sp" />
-
-        <!-- Add more TextViews or other views as needed for additional information -->
 
     </LinearLayout>
 </ScrollView>

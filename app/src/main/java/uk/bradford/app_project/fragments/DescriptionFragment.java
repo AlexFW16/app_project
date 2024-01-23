@@ -4,12 +4,14 @@ package uk.bradford.app_project.fragments;
 import static android.view.View.GONE;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
@@ -21,10 +23,6 @@ public class DescriptionFragment extends Fragment {
     private final Cipher cipher;
 
     private TextView textView;
-    private Button usageButton;
-    private Button descriptionButton;
-
-    private LinearLayout parentView;
 
     public DescriptionFragment() {
         cipher = null;
@@ -39,10 +37,10 @@ public class DescriptionFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.description, container, false);
 
         textView = rootView.findViewById(R.id.descriptionTextView);
-        usageButton = rootView.findViewById(R.id.descriptionUsageButton);
-        descriptionButton = rootView.findViewById(R.id.descriptionDescriptionButton);
+        Button usageButton = rootView.findViewById(R.id.descriptionUsageButton);
+        Button descriptionButton = rootView.findViewById(R.id.descriptionDescriptionButton);
 
-        parentView = rootView.findViewById(R.id.description_parent);
+        LinearLayout parentView = rootView.findViewById(R.id.description_parent);
 
         usageButton.setOnClickListener(this::onUsageButtonClick);
         descriptionButton.setOnClickListener(this::onDescriptionButtonClick);
@@ -54,20 +52,25 @@ public class DescriptionFragment extends Fragment {
         }
 
         textView.setText(cipher.getDescription());
-
         return rootView;
     }
 
     public void onUsageButtonClick(View v) {
-
-        textView.setText(cipher.getUsage());
-
-
+        if (cipher == null) {
+            Toast.makeText(requireActivity(), R.string.cipher_is_null_error, Toast.LENGTH_SHORT).show();
+            Log.e("DescriptionFragment", "cipher field of DescriptionFragment is null");
+        } else {
+            textView.setText(cipher.getUsage());
+        }
     }
 
     public void onDescriptionButtonClick(View v) {
-        textView.setText(cipher.getDescription());
-
+        if (cipher == null) {
+            Toast.makeText(requireActivity(), R.string.cipher_is_null_error, Toast.LENGTH_SHORT).show();
+            Log.e("DescriptionFragment", "cipher field of DescriptionFragment is null");
+        } else {
+            textView.setText(cipher.getDescription());
+        }
 
     }
 

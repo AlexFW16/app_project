@@ -13,7 +13,7 @@ public class SpeechRecognitionListener implements RecognitionListener {
 
 
     protected SpeechRecognizer speechRecognizer;
-    private TextView outTextView;
+    private final TextView outTextView;
 
 
     public SpeechRecognitionListener(SpeechRecognizer speechRecognizer, TextView outTextView) {
@@ -28,23 +28,6 @@ public class SpeechRecognitionListener implements RecognitionListener {
 
     @Override
     public void onBeginningOfSpeech() {
-        //TODO Implement "is listening dialog
-
-        // Called when speech input has started
-        // Show a listening dialog
-
-
-            /*
-            ViewGroup viewGroup = findViewById(android.R.id.content);
-            View dialogView = LayoutInflater.from(MainActivity.this).inflate(R.layout.alertcus, viewGroup, false);
-
-            alertSpeechDialog = new AlertDialog.Builder(MainActivity.this);
-            alertSpeechDialog.setMessage("Listening.....");
-            alertSpeechDialog.setView(dialogView);
-            alertDialog = alertSpeechDialog.create();
-            alertDialog.show();
-
-             */
     }
 
     @Override
@@ -71,8 +54,11 @@ public class SpeechRecognitionListener implements RecognitionListener {
     // Called when speech recognition results are available
     @Override
     public void onResults(Bundle bundle) {
-        ArrayList<String> arrayList = bundle.getStringArrayList(speechRecognizer.RESULTS_RECOGNITION);
-        outTextView.setText(arrayList.get(0));
+        ArrayList<String> recognitionResultsList = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
+        if (recognitionResultsList == null)
+            Log.e("SpeechRecognitionListener", "List of recognition results was null");
+        else
+            outTextView.setText(recognitionResultsList.get(0));
     }
 
     @Override

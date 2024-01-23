@@ -1,26 +1,25 @@
 package uk.bradford.app_project;
 
+import static uk.bradford.app_project.Util.fromBinaryStringToString;
+import static uk.bradford.app_project.Util.fromIntArrayToString;
+import static uk.bradford.app_project.Util.fromStringToBinaryString;
+import static uk.bradford.app_project.Util.fromStringToIntArray;
+import static uk.bradford.app_project.Util.keyToMessageLength;
+import static uk.bradford.app_project.Util.parsePermutationSubstitution;
+import static uk.bradford.app_project.Util.parsePermutationTransposition;
 
-//import javax.swing.*;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static uk.bradford.app_project.Util.*;
-
-//TODO rename class
-// TODO consider spaces in the text
 public class Crypto {
 
-
-    // TODO maybe outsource alphabets? -> alphabets are not that relevant anymore
     static final String[] characters = "A B C D E F G H I J K L M N O P Q R S T U V W X Y Z 0 1 2 3 4 5 6 7 8 9".split(" ");
     // Alphabet with only uppercase letters
     static final Set<Character> alphabet1 = Arrays.stream(characters).limit(26).map(s -> s.charAt(0)).collect(Collectors.toSet());
 
     // Alphabet with uppercase letters + numbers
-    static final Set<String> alphabet2 = Arrays.stream(characters).collect(Collectors.toSet());
 
     // Checks if the alphabet used in key/message works for this cipher
     // Matches cipher to alphabet
@@ -105,7 +104,6 @@ public class Crypto {
    MESSAGE
    -------
    MFUSBIE
-
     */
     private static String encryptVigenere(String plaintext, String key) {
 
@@ -150,6 +148,9 @@ public class Crypto {
 
     }
 
+    /*
+    Converts input into binary and XORs plaintext with key
+     */
     private static String encryptXOR(String plainText, String key) {
         key = keyToMessageLength(plainText, key);
 
@@ -158,9 +159,7 @@ public class Crypto {
         int[] out = new int[binaryPlaintext.length];
 
         for (int i = 0; i < binaryPlaintext.length; i++) {
-            //out[i] = binaryCiphertext[i] ^ binaryKey[i];
             out[i] = (binaryPlaintext[i] == binaryKey[i]) ? 0 : 1;
-            //System.out.printf("%d XOR %d = %d\n", binaryCiphertext[i], binaryKey[i], out[i]);
         }
 
         return fromBinaryStringToString(fromIntArrayToString(out));
@@ -170,15 +169,19 @@ public class Crypto {
         return encryptXOR(ciphertext, key);
     }
 
+    /*
+    Encrypts by replacing characters in the msg with different characters. The mapping is given
+    as a permutation (as a key).
+     */
     private static String encryptSubstitutionCipher(String plaintext, String key) throws IllegalArgumentException {
 
-        Map characterMapping = parsePermutationSubstitution(key, false);
+        Map<Character, Character> characterMapping = parsePermutationSubstitution(key, false);
 
         StringBuilder sb = new StringBuilder();
 
         for (char c : plaintext.toCharArray()) {
 
-            if (characterMapping.keySet().contains(c)) sb.append(characterMapping.get(c));
+            if (characterMapping.containsKey(c)) sb.append(characterMapping.get(c));
             else sb.append(c);
         }
 
@@ -187,12 +190,12 @@ public class Crypto {
 
     private static String decryptSubstitutionCipher(String ciphertext, String key) throws IllegalArgumentException {
 
-        Map characterMapping = parsePermutationSubstitution(key, true);
+        Map<Character, Character> characterMapping = parsePermutationSubstitution(key, true);
         StringBuilder sb = new StringBuilder();
 
         for (char c : ciphertext.toCharArray()) {
 
-            if (characterMapping.keySet().contains(c)) sb.append(characterMapping.get(c));
+            if (characterMapping.containsKey(c)) sb.append(characterMapping.get(c));
             else sb.append(c);
         }
 
@@ -208,10 +211,10 @@ public class Crypto {
         char[] plaintextArray = plaintext.toCharArray();
         char[] out = Arrays.copyOf(plaintextArray, plaintextArray.length);
 
+
         for (int i = 0; i < plaintext.length(); i++) {
 
-            if (characterMapping.keySet().contains(i))
-                out[characterMapping.get(i)] = plaintextArray[i];
+            if (characterMapping.containsKey(i)) out[characterMapping.get(i)] = plaintextArray[i];
         }
         return String.valueOf(out);
 
@@ -224,10 +227,9 @@ public class Crypto {
         char[] ciphertextArray = ciphertext.toCharArray();
         char[] out = Arrays.copyOf(ciphertextArray, ciphertextArray.length);
 
-        for (int i = 0; i < ciphertext.length(); i++){
+        for (int i = 0; i < ciphertext.length(); i++) {
 
-            if (characterMapping.keySet().contains(i))
-                out[characterMapping.get(i)] = ciphertextArray[i];
+            if (characterMapping.containsKey(i)) out[characterMapping.get(i)] = ciphertextArray[i];
         }
 
         return String.valueOf(out);

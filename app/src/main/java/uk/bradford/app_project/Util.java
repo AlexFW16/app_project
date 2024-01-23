@@ -21,9 +21,9 @@ public class Util {
 
         for (char c : input.toCharArray()) {
 
-            String binaryString = Integer.toBinaryString(c);
+            StringBuilder binaryString = new StringBuilder(Integer.toBinaryString(c));
 
-            while (binaryString.length() < 8) binaryString = "0" + binaryString;
+            while (binaryString.length() < 8) binaryString.insert(0, "0");
 
             builder.append(binaryString);
         }
@@ -40,11 +40,11 @@ public class Util {
     }
 
     public static int[] fromStringToIntArray(String binaryString) {
-        return binaryString.chars().map(c -> Character.getNumericValue(c)).toArray();
+        return binaryString.chars().map(Character::getNumericValue).toArray();
     }
 
     public static String fromIntArrayToString(int[] binaryArray) {
-        return Arrays.stream(binaryArray).mapToObj(i -> String.valueOf(i)).collect(Collectors.joining());
+        return Arrays.stream(binaryArray).mapToObj(String::valueOf).collect(Collectors.joining());
     }
 
     // For substitution and transposition ciphers
@@ -53,7 +53,7 @@ public class Util {
         char[] input = inputString.replaceAll("\\)\\s+\\(", ")(").toCharArray();
 
         if (input[0] != '(' || input[input.length - 1] != ')')
-            throw new IllegalArgumentException("Badly formatted: Does not start with \'(\' or end with \')\'");
+            throw new IllegalArgumentException("Badly formatted: Does not start with '(' or end with ')'");
 
         HashMap<Integer, Integer> cipherMapping = new HashMap<>();
         HashSet<Integer> used = new HashSet<>();
@@ -62,8 +62,8 @@ public class Util {
 
         for (String cycle : cycles) {
             if (cycle.contains("(") || cycle.contains(")"))
-                throw new IllegalArgumentException("Badly formatted: Wrongly placed \'(\' or \')\'");
-            if(cycle.contains("0"))
+                throw new IllegalArgumentException("Badly formatted: Wrongly placed '(' or ')'");
+            if (cycle.contains("0"))
                 throw new IllegalArgumentException("Badly formatted: 0 is not allowed as an index");
 
             String[] numbersStrings = cycle.split(" ");
@@ -72,14 +72,14 @@ public class Util {
                 if (reversed) {
                     for (int i = numbersStrings.length - 1; i >= 0; i--) {
 
-                        int cur = Integer.valueOf(numbersStrings[i]) - 1; //
-                        int next = (i > 0) ? Integer.valueOf(numbersStrings[i - 1]) - 1 : Integer.valueOf(numbersStrings[numbersStrings.length - 1]) - 1;
+                        int cur = Integer.parseInt(numbersStrings[i]) - 1; //
+                        int next = (i > 0) ? Integer.parseInt(numbersStrings[i - 1]) - 1 : Integer.parseInt(numbersStrings[numbersStrings.length - 1]) - 1;
 
                         if (used.contains(cur))
-                            throw new IllegalArgumentException("Badly formatted: Value \'" + cur + "\' used more than once");
+                            throw new IllegalArgumentException("Badly formatted: Value '" + cur + "' used more than once");
 
                         if (cur >= messageLength)
-                            throw new IllegalArgumentException("Badly formatted: Value \'" + numbersStrings[i] + "\' is too big for message of size " + messageLength);
+                            throw new IllegalArgumentException("Badly formatted: Value '" + numbersStrings[i] + "' is too big for message of size " + messageLength);
 
                         cipherMapping.put(cur, next);
                         used.add(Integer.valueOf(numbersStrings[i]));
@@ -87,14 +87,14 @@ public class Util {
                 } else {
                     for (int i = 0; i < numbersStrings.length; i++) {
 
-                        int cur = Integer.valueOf(numbersStrings[i]) - 1;
-                        int next = (i < numbersStrings.length - 1) ? Integer.valueOf(numbersStrings[i + 1]) - 1 : Integer.valueOf(numbersStrings[0]) - 1;
+                        int cur = Integer.parseInt(numbersStrings[i]) - 1;
+                        int next = (i < numbersStrings.length - 1) ? Integer.parseInt(numbersStrings[i + 1]) - 1 : Integer.parseInt(numbersStrings[0]) - 1;
 
                         if (used.contains(cur))
-                            throw new IllegalArgumentException("Badly formatted: Value \'" + numbersStrings[i] + "\' used more than once");
+                            throw new IllegalArgumentException("Badly formatted: Value '" + numbersStrings[i] + "' used more than once");
 
                         if (cur >= messageLength)
-                            throw new IllegalArgumentException("Badly formatted: Value \'" + numbersStrings[i] + "\' is too big for message of size " + messageLength);
+                            throw new IllegalArgumentException("Badly formatted: Value '" + numbersStrings[i] + "' is too big for message of size " + messageLength);
 
                         cipherMapping.put(cur, next);
 
@@ -118,13 +118,13 @@ public class Util {
      */
     public static HashMap<Character, Character> parsePermutationSubstitution(String inputString, boolean reversed) throws IllegalArgumentException {
 
-        // also replaces all whitespaces in the permutation (cannot be used for tranposition as whitespaces there are used to seperate numbers)
+        // also replaces all whitespaces in the permutation (cannot be used for transposition as whitespaces there are used to separate numbers)
         char[] input = inputString.replaceAll("\\)\\s+\\(", ")(").toCharArray();
 
 
         // must start and end with bracket
         if (input[0] != '(' || input[input.length - 1] != ')')
-            throw new IllegalArgumentException("Badly formatted: Does not start with \'(\' or end with \')\'");
+            throw new IllegalArgumentException("Badly formatted: Does not start with '(' or end with ')'");
 
         HashMap<Character, Character> cipherMapping = new HashMap<>();
         HashSet<Character> used = new HashSet<>(); // used to efficiently check if char is used multiple times
@@ -138,7 +138,7 @@ public class Util {
          */
         for (String cycle : cycles) {
             if (cycle.contains("(") || cycle.contains(")"))
-                throw new IllegalArgumentException("Badly formatted: Wrongly placed \'(\' or \')\'");
+                throw new IllegalArgumentException("Badly formatted: Wrongly placed '(' or ')'");
 
             char[] cycleArray = cycle.toCharArray();
 
@@ -146,7 +146,7 @@ public class Util {
                 for (int i = cycleArray.length - 1; i >= 0; i--) {
                     char cur = cycleArray[i];
                     if (used.contains(cur))
-                        throw new IllegalArgumentException("Badly formatted: Character \'" + cur + "\' used more than once");
+                        throw new IllegalArgumentException("Badly formatted: Character '" + cur + "' used more than once");
                     used.add(cur);
 
                     if (i == 0) // the first char is mapped to the last one (cycle)
@@ -159,7 +159,7 @@ public class Util {
                 for (int i = 0; i < cycleArray.length; i++) {
                     char cur = cycleArray[i];
                     if (used.contains(cur))
-                        throw new IllegalArgumentException("Badly formatted: Character \'" + cur + "\' used more than once");
+                        throw new IllegalArgumentException("Badly formatted: Character '" + cur + "' used more than once");
 
                     used.add(cur);
 

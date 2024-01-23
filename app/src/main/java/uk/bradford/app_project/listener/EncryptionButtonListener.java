@@ -3,6 +3,8 @@ package uk.bradford.app_project.listener;
 import android.util.Log;
 import android.view.View;
 
+import java.util.Objects;
+
 import uk.bradford.app_project.Crypto;
 import uk.bradford.app_project.fragments.CipherFragment;
 
@@ -20,11 +22,10 @@ public class EncryptionButtonListener implements View.OnClickListener {
         try {
             String encryptedText = Crypto.encrypt(fragment.getCipher().getType(), fragment.getMsgEditText().getText().toString(), fragment.getKeyEditText().getText().toString());
             fragment.getOutputTextView().setText(encryptedText);
-        } catch (IllegalArgumentException e) {
 
+        } catch (IllegalArgumentException e) {
             fragment.printErrorMessage(fragment.getCipher());
-            // Toast.makeText(getActivity().getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-            Log.e("IllegalArgumentException", e.getMessage());
+            Log.e("IllegalArgumentException", Objects.requireNonNull(e.getMessage()));
         }
 
     }

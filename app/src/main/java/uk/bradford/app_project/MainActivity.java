@@ -1,20 +1,5 @@
 package uk.bradford.app_project;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.android.material.navigation.NavigationView;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -23,11 +8,23 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.google.android.gms.tasks.Task;
+import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
+import java.util.Objects;
 
 import uk.bradford.app_project.fragments.AboutFragment;
 import uk.bradford.app_project.fragments.CipherFragment;
@@ -43,7 +40,6 @@ import uk.bradford.app_project.model.User;
 public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
-    private NavigationView navigationView;
 
     private FirebaseAuth mAuth;
     private FirebaseUser user;
@@ -65,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         drawerLayout = findViewById(R.id.drawer_layout);
-        navigationView = findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
 
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
@@ -76,12 +72,12 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.topAppBar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("");
+        Objects.requireNonNull(getSupportActionBar()).setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.menuicon);
 
         // Restore user data
-        restoreUserDataToPrefs(mAuth.getCurrentUser());
+        restoreUserDataToPrefs(Objects.requireNonNull(mAuth.getCurrentUser()));
     }
 
 
@@ -140,10 +136,9 @@ public class MainActivity extends AppCompatActivity {
 
         } else if (id == R.id.menu_divider) {
             return true;
-        }
-        else {
+        } else {
             Log.e("NavigationView", "Invalid menu item id");
-            fragment = null;
+            return false;
         }
 
         // Sets the fragments into the containers
@@ -160,14 +155,15 @@ public class MainActivity extends AppCompatActivity {
         if (user == null) {
             Log.e("Logout", "User is null");
             return false;
+
         } else {
             // Creates a User object that is stored on the database
             // containing the recent snapshot of all ciphers
-            User userDataObject = new User(mAuth.getCurrentUser());
+            User userDataObject = new User(Objects.requireNonNull(mAuth.getCurrentUser()));
             userDataObject.setLastSnapshot(createCipherSnapshot());
 
 
-            Task task = database.getReference().child("users").child(userDataObject.getId()).setValue(userDataObject);
+            Task<Void> task = database.getReference().child("users").child(userDataObject.getId()).setValue(userDataObject);
             // Makes sure that only if the task is completed and successful, the prefs file gets emptied
             task.addOnCompleteListener(this::onSavingUserDataCompleted);
 
@@ -184,14 +180,13 @@ public class MainActivity extends AppCompatActivity {
         finish();
     }
 
-    private void onSavingUserDataCompleted(Task task) {
+    private void onSavingUserDataCompleted(Task<Void> task) {
         if (task.isSuccessful()) {
-            Log.d("Firebase", "Saving cipher snapshot for user:success");
-
             removeSnapshotsFromPrefs();
+
         } else {
             // If sign in fails, display a message to the user.
-            Log.w("Firebase", "Saving cipher snapshot failed, not deleting prefs", task.getException());
+            Log.w(getClass().getName(), "Saving cipher snapshot failed, not deleting prefs", task.getException());
             Toast.makeText(getApplicationContext(), "An Error occurred while trying to store data, please login again to save your data.", Toast.LENGTH_SHORT).show();
         }
 
@@ -242,36 +237,33 @@ public class MainActivity extends AppCompatActivity {
     private void restoreUserDataToPrefs(FirebaseUser user) {
 
         DatabaseReference mDatabase = database.getReference();
-        mDatabase.child("users").child(user.getUid()).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DataSnapshot> task) {
-                if (!task.isSuccessful()) {
-                    Log.e("firebase", "Error getting data", task.getException());
-                } else {
-                    // Retrieval was successful
-                    Log.d("firebase", String.valueOf(task.getResult().getValue()));
-                    User userDataObject = task.getResult().getValue(User.class);
+        mDatabase.child("users").child(user.getUid()).get().addOnCompleteListener(task -> {
 
-                    // Restoring data from the user object
-                    SharedPreferences prefs = getPreferences(Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = prefs.edit();
+            if (!task.isSuccessful()) {
+                Log.e("firebase", "Error getting data", task.getException());
+            } else {
+                // Retrieval was successful
+                Log.d("firebase", String.valueOf(task.getResult().getValue()));
+                User userDataObject = task.getResult().getValue(User.class);
 
-                    // user has no history yet
-                    if (userDataObject == null || userDataObject.getLastSnapshot() == null || userDataObject.getLastSnapshot().getCiphersPairs() == null)
-                        return;
+                // Restoring data from the user object
+                SharedPreferences prefs = getPreferences(Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = prefs.edit();
 
-                    int i = 0;
-                    for (Cipher.Type cipher : Cipher.Type.values()) {
-                        ArrayList<String> cipherValues = userDataObject.getLastSnapshot().getCiphersPairs().get(i);
-                        editor.putString(cipher + "key", cipherValues.get(0));
-                        editor.putString(cipher + "msg", cipherValues.get(1));
-                        editor.putString(cipher + "out", cipherValues.get(2));
-                        editor.apply();
-                        i++;
-                    }
+                // user has no history yet
+                if (userDataObject == null || userDataObject.getLastSnapshot() == null || userDataObject.getLastSnapshot().getCiphersPairs() == null)
+                    return;
 
-
+                int i = 0;
+                for (Cipher.Type cipher : Cipher.Type.values()) {
+                    ArrayList<String> cipherValues = userDataObject.getLastSnapshot().getCiphersPairs().get(i);
+                    editor.putString(cipher + "key", cipherValues.get(0));
+                    editor.putString(cipher + "msg", cipherValues.get(1));
+                    editor.putString(cipher + "out", cipherValues.get(2));
+                    editor.apply();
+                    i++;
                 }
+
             }
         });
 

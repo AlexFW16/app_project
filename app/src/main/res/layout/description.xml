@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/description_parent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -40,7 +39,8 @@
             android:layout_gravity="center"
             android:layout_margin="10sp"
 
-            android:text="@string/description_button_description" />
+            android:text="@string/description_button_description"
+            style="?android:attr/buttonBarButtonStyle" />
 
         <Button
             android:id="@+id/descriptionUsageButton"
@@ -48,7 +48,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="10sp"
-            android:text="@string/description_button_usage" />
+            android:text="@string/description_button_usage"
+            style="?android:attr/buttonBarButtonStyle" />
 
 
     </LinearLayout>

@@ -1,49 +1,44 @@
 package uk.bradford.app_project;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
-import uk.bradford.app_project.model.User;
+import java.util.Objects;
 
 public class LoginActivity extends AppCompatActivity {
 
     private TextInputEditText emailEditText, passwordEditText;
-    private Button loginButton, registerButton;
 
     private FirebaseAuth mAuth;
 
-    private FirebaseDatabase database;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // Enforces light mode, bc dark mode does not work yet
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
         mAuth = FirebaseAuth.getInstance();
-        database = FirebaseDatabase.getInstance();
 
         emailEditText = findViewById(R.id.login_email_input);
         passwordEditText = findViewById(R.id.login_password_input);
-        loginButton = findViewById(R.id.login_login_button);
-        registerButton = findViewById(R.id.login_register_button);
+        Button loginButton = findViewById(R.id.login_login_button);
+        Button registerButton = findViewById(R.id.login_register_button);
 
         loginButton.setOnClickListener(this::onLoginButtonClick);
         registerButton.setOnClickListener(this::onRegisterButtonClick);
@@ -58,8 +53,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void onLoginButtonClick(View v) {
-        String email = emailEditText.getText().toString();
-        String password = passwordEditText.getText().toString();
+        String email = Objects.requireNonNull(emailEditText.getText()).toString();
+        String password = Objects.requireNonNull(passwordEditText.getText()).toString();
         login(email, password);
 
     }
@@ -88,14 +83,13 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void onCompleteFirebaseLogin(@NonNull Task<AuthResult> task) {
-        if (task.isSuccessful()) {
-            // Sign in success, update UI with the signed-in user's information
-            Log.d("FirebaseAuth", "signInWithEmail:success");
+
+        if (task.isSuccessful()) { // Login success, update UI with the signed-in user's information
             FirebaseUser user = mAuth.getCurrentUser();
             updateUI(user);
-        } else {
-            // Sign in failed
-            Log.w("FirebaseAuth", "signInWithEmail:failure", task.getException());
+
+        } else { // Login failed
+            Log.w(getClass().getName(), "signInWithEmail failed", task.getException());
             Toast.makeText(getApplicationContext(), "Authentication failed.", Toast.LENGTH_SHORT).show();
             updateUI(null);
         }
@@ -104,8 +98,9 @@ public class LoginActivity extends AppCompatActivity {
 
     private void updateUI(FirebaseUser user) {
         if (user == null) {
-            // Login failed
-            //TODO
+            Toast.makeText(getApplicationContext(), R.string.login_failed, Toast.LENGTH_LONG).show();
+            Log.e(getClass().getName(), "Login failed because user==null");
+
         } else { // Login successful
             Toast.makeText(getApplicationContext(), "You are logged in!", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);

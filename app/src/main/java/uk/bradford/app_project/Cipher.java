@@ -6,7 +6,6 @@ public class Cipher {
     private final int LAYOUT;
     private final int ERROR_MSG;
 
-
     private final int USAGE;
 
     private final int DESCRIPTION;

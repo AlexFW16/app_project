@@ -4,13 +4,10 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.SurfaceHolder;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Switch;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
@@ -22,6 +19,8 @@ import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.Objects;
+
 import uk.bradford.app_project.R;
 
 public class SettingsFragment extends Fragment {
@@ -32,22 +31,18 @@ public class SettingsFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.settings, container, false);
 
-
         Button editPasswordButton = rootView.findViewById(R.id.settings_change_password);
-
-
         editPasswordButton.setOnClickListener(view -> changePassword());
-
 
         return rootView;
     }
 
 
     private void changePassword() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
         builder.setTitle(R.string.change_pswd_title);
 
-        // inflates the layout and sets the view
+        // inflates the dialog layout and sets the view
         View view = getLayoutInflater().inflate(R.layout.change_password_dialog, null);
         builder.setView(view);
 
@@ -74,7 +69,13 @@ public class SettingsFragment extends Fragment {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         // Try to authenticate the user
-        AuthCredential credential = EmailAuthProvider.getCredential(user.getEmail(), oldPassword);
+        if (user == null) {
+            Toast.makeText(requireActivity(), R.string.change_pswd_user_null_error, Toast.LENGTH_LONG).show();
+            Log.w("SettingsFragment", "user is null when updating password");
+            return;
+        }
+
+        AuthCredential credential = EmailAuthProvider.getCredential(Objects.requireNonNull(user.getEmail()), oldPassword);
         user.reauthenticate(credential).addOnCompleteListener(reAuthTask -> {
 
             //Authentication failed
@@ -94,8 +95,6 @@ public class SettingsFragment extends Fragment {
             Toast.makeText(getActivity(), R.string.change_pswd_success, Toast.LENGTH_LONG).show();
         else
             Toast.makeText(getActivity(), R.string.change_pswd_update_error, Toast.LENGTH_LONG).show();
-
-
     }
 
  /*
@@ -120,7 +119,6 @@ Not working yet, can be implemented in the future
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(R.string.change_email_title);
 
-        //TODO rename layout
         View view = getLayoutInflater().inflate(R.layout.change_email_dialog, null);
 
         TextView currentEmailView = view.findViewById(R.id.currentEmailTextView);

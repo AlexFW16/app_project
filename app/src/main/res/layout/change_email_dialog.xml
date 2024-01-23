@@ -6,7 +6,6 @@
 
     <!-- alert window for changing email -->
     <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -23,14 +22,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/change_email_email"
-            android:inputType="textEmailAddress"/>
+            android:inputType="textEmailAddress"
+            android:autofillHints="emailAddress" />
 
         <EditText
             android:id="@+id/passwordEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/change_email_pswd"
-            android:inputType="textPassword"/>
+            android:inputType="textPassword"
+            android:autofillHints="password" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

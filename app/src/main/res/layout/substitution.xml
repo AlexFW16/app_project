@@ -2,14 +2,13 @@
 
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="15sp">
 
     <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="0sp"
+        android:layout_height="0sp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -24,15 +23,14 @@
             android:text="@string/cipher3_title"
             android:textSize="34sp" />
 
-        <!-- existing AppBarLayout, Toolbar, and other views -->
-
         <EditText
             android:id="@+id/key"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:autofillHints="text"
             android:ems="10"
-            android:inputType="text"
-            android:hint="@string/cipher3_key" />
+            android:hint="@string/key"
+            android:inputType="text" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -43,17 +41,20 @@
                 android:id="@+id/msg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="15sp"
+                android:layout_marginEnd="15sp"
+                android:autofillHints="text"
                 android:ems="15"
-                android:hint="@string/cipher3_msg"
+                android:hint="@string/msg"
                 android:inputType="text" />
 
             <ImageView
                 android:id="@+id/mic"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:contentDescription="@string/cipher_microphone"
                 android:src="@drawable/micro" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -64,21 +65,21 @@
                 android:id="@+id/encrypt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="69dp"
+                android:layout_marginEnd="50sp"
                 android:drawableStart="@android:drawable/ic_lock_lock"
-                android:drawablePadding="8dp"
+                android:drawablePadding="8sp"
                 android:drawableTint="#FFFFFF"
-                android:text="@string/cipher3_encryption_btn" />
+                android:text="@string/encrypt_button" />
 
             <Button
                 android:id="@+id/decrypt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="69dp"
+                android:layout_marginStart="50sp"
                 android:drawableStart="@drawable/baseline_lock_24"
-                android:drawablePadding="8dp"
+                android:drawablePadding="8sp"
                 android:drawableTint="#FFFFFF"
-                android:text="@string/cipher3_decryption_btn" />
+                android:text="@string/decrypt_button" />
         </LinearLayout>
 
         <TextView
@@ -86,15 +87,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#FFFFFFFF"
-            android:gravity="top|left"
-            android:padding="4dp"
-            android:textColor="@color/black"
+            android:gravity="top|start"
+            android:padding="4sp"
             android:text="@string/cipher3_output"
+            android:textColor="@color/black"
             android:textIsSelectable="true"
             android:textSize="18sp" />
-
-
-        <!-- the TextView text & color will remain static until then...  -->
 
     </LinearLayout>
 

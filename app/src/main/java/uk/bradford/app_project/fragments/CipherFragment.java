@@ -1,5 +1,6 @@
 package uk.bradford.app_project.fragments;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -10,7 +11,6 @@ import android.speech.SpeechRecognizer;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,8 +27,8 @@ import uk.bradford.app_project.Cipher;
 import uk.bradford.app_project.R;
 import uk.bradford.app_project.listener.DecryptionButtonListener;
 import uk.bradford.app_project.listener.EncryptionButtonListener;
-import uk.bradford.app_project.listener.SpeechRecognitionListener;
 import uk.bradford.app_project.listener.MicButtonListener;
+import uk.bradford.app_project.listener.SpeechRecognitionListener;
 
 public abstract class CipherFragment extends Fragment {
     protected Button encryptBtn, decryptBtn;
@@ -38,8 +38,6 @@ public abstract class CipherFragment extends Fragment {
 
     protected ImageView micView;
     private SpeechRecognizer speechRecognizer;
-
-    private Intent speechIntent;
 
 
     public abstract Cipher getCipher();
@@ -57,6 +55,7 @@ public abstract class CipherFragment extends Fragment {
         return keyEditText;
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -74,7 +73,7 @@ public abstract class CipherFragment extends Fragment {
         // Must be before the listeners are set but after elements are assigned
         speechRecognizer = SpeechRecognizer.createSpeechRecognizer(rootView.getContext());
 
-        this.speechIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        Intent speechIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         speechIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
         speechIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
 
@@ -85,7 +84,7 @@ public abstract class CipherFragment extends Fragment {
         EncryptionButtonListener encryptionButtonListener = new EncryptionButtonListener(this);
         DecryptionButtonListener decryptionButtonListener = new DecryptionButtonListener(this);
 
-        micView.setOnTouchListener(micButtonListener::onMicTouch);
+        micView.setOnTouchListener(micButtonListener);
         encryptBtn.setOnClickListener(encryptionButtonListener);
         decryptBtn.setOnClickListener(decryptionButtonListener);
 
@@ -127,7 +126,7 @@ public abstract class CipherFragment extends Fragment {
 
     // Saves the current in/outputs in the cipher fragment into the shared prefs
     public void saveToPrefs() {
-        SharedPreferences prefs = getActivity().getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences prefs = requireActivity().getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString(getCipher().getType().toString() + "key", keyEditText.getText().toString());
         editor.putString(getCipher().getType().toString() + "msg", msgEditText.getText().toString());
@@ -143,7 +142,7 @@ public abstract class CipherFragment extends Fragment {
     private void loadFromPrefs() {
 
         // Loads the latest in/outputs into the current cipher
-        SharedPreferences prefs = getActivity().getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences prefs = requireActivity().getPreferences(Context.MODE_PRIVATE);
         String key = prefs.getString(getCipher().getType().toString() + "key", "");
         String msg = prefs.getString(getCipher().getType().toString() + "msg", "");
         String out = prefs.getString(getCipher().getType().toString() + "out", "");
